@@ -13,18 +13,16 @@ import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
 import ComplexStatisticsCard from "examples/Cards/StatisticsCards/ComplexStatisticsCard";
-import DataTable from "examples/Tables/DataTable";
 
 function NEWDashboard() {
   const [dashboardData, setDashboardData] = useState(null);
-  const [lastBookings, setLastBookings] = useState([]);
 
   useEffect(() => {
     const fetchDashboardData = async () => {
       try {
         const response = await axios.get("https://bluecollar.sndktech.online/api/dashboard/data");
         if (response.data) {
-          setDashboardData(response.data);
+          setDashboardData(response.data.data);
         }
       } catch (error) {
         console.error("Error fetching dashboard data:", error);
@@ -32,23 +30,10 @@ function NEWDashboard() {
       }
     };
 
-    const fetchLastBookings = async () => {
-      try {
-        const response = await axios.get("https://bluecollar.sndktech.online/api/dashboard/last/bookings");
-        if (response.data && response.data.bookings) {
-          setLastBookings(response.data.bookings);
-        }
-      } catch (error) {
-        console.error("Error fetching last bookings:", error);
-        alert("Failed to fetch last bookings. Please check your network connection and try again.");
-      }
-    };
-
     fetchDashboardData();
-    fetchLastBookings();
   }, []);
 
-  if (!dashboardData || !lastBookings) {
+  if (!dashboardData) {
     return (
       <DashboardLayout>
         <DashboardNavbar />
@@ -56,10 +41,9 @@ function NEWDashboard() {
           <Grid container spacing={3}>
             <Grid item xs={12}>
               <MDBox mx={2} mt={-3} py={3} px={2} variant="gradient" bgColor="info" borderRadius="lg" coloredShadow="info">
-                {/* Loading message can be uncommented if needed */}
-                {/* <MDTypography variant="h6" color="white">
+                <MDTypography variant="h6" color="white">
                   Loading Dashboard Data...
-                </MDTypography> */}
+                </MDTypography>
               </MDBox>
             </Grid>
           </Grid>
@@ -68,17 +52,6 @@ function NEWDashboard() {
       </DashboardLayout>
     );
   }
-
-  const columns = [
-    { Header: "Booking ID", accessor: "booking_id" },
-    { Header: "User ID", accessor: "user_id" },
-    { Header: "Total Amount", accessor: "total_amount" },
-    { Header: "Service Name", accessor: "service_name" },
-    { Header: "Worker Name", accessor: "worker_name" },
-    { Header: "Service Charge", accessor: "service_charge" },
-    { Header: "Service Date", accessor: "service_date" },
-    { Header: "Status", accessor: "status" },
-  ];
 
   return (
     <DashboardLayout>
@@ -90,13 +63,8 @@ function NEWDashboard() {
               <ComplexStatisticsCard
                 color="dark"
                 icon="weekend"
-                title="Bookings"
-                count={dashboardData.totalBookings}
-                percentage={{
-                  color: "success",
-                  amount: "+55%",
-                  label: "than last week",
-                }}
+                title="Genre Count"
+                count={dashboardData.genreCount}
               />
             </MDBox>
           </Grid>
@@ -104,13 +72,8 @@ function NEWDashboard() {
             <MDBox mb={1.5}>
               <ComplexStatisticsCard
                 icon="leaderboard"
-                title="Users"
-                count={dashboardData.totalUsers}
-                percentage={{
-                  color: "success",
-                  amount: "+3%",
-                  label: "than last month",
-                }}
+                title="Creator Count"
+                count={dashboardData.creatorCount}
               />
             </MDBox>
           </Grid>
@@ -119,13 +82,8 @@ function NEWDashboard() {
               <ComplexStatisticsCard
                 color="success"
                 icon="store"
-                title="Vendors"
-                count={dashboardData.totalVendors}
-                percentage={{
-                  color: "success",
-                  amount: "+1%",
-                  label: "than yesterday",
-                }}
+                title="User Count"
+                count={dashboardData.usersCount}
               />
             </MDBox>
           </Grid>
@@ -134,54 +92,42 @@ function NEWDashboard() {
               <ComplexStatisticsCard
                 color="primary"
                 icon="person_add"
-                title="Workers"
-                count={dashboardData.totalWorkers}
-                percentage={{
-                  color: "success",
-                  amount: "",
-                  label: "Just updated",
-                }}
+                title="Story Count"
+                count={dashboardData.storyCount}
+              />
+            </MDBox>
+          </Grid>
+          <Grid item xs={12} md={6} lg={3}>
+            <MDBox mb={1.5}>
+              <ComplexStatisticsCard
+                color="info"
+                icon="audiobook"
+                title="Audiobook Count"
+                count={dashboardData.audiobookCount}
+              />
+            </MDBox>
+          </Grid>
+          <Grid item xs={12} md={6} lg={3}>
+            <MDBox mb={1.5}>
+              <ComplexStatisticsCard
+                color="warning"
+                icon="podcast_play"
+                title="Podcast Count"
+                count={dashboardData.podcastCount}
+              />
+            </MDBox>
+          </Grid>
+          <Grid item xs={12} md={6} lg={3}>
+            <MDBox mb={1.5}>
+              <ComplexStatisticsCard
+                color="error"
+                icon="episode"
+                title="Episode Count"
+                count={dashboardData.episodeCount}
               />
             </MDBox>
           </Grid>
         </Grid>
-        <MDBox mt={4.5}>
-          <Grid container spacing={3}>
-            <Grid item xs={12} md={6} lg={4}>
-              <MDBox mb={3}>
-                {/* Placeholder for ReportsBarChart */}
-              </MDBox>
-            </Grid>
-            <Grid item xs={12} md={6} lg={4}>
-              <MDBox mb={3}>
-                {/* Placeholder for ReportsLineChart */}
-              </MDBox>
-            </Grid>
-            <Grid item xs={12} md={6} lg={4}>
-              <MDBox mb={3}>
-                {/* Placeholder for ReportsLineChart */}
-              </MDBox>
-            </Grid>
-          </Grid>
-        </MDBox>
-        <MDBox mt={0}>
-          <Grid container spacing={3}>
-            <Grid item xs={12}>
-              <MDBox mb={3}>
-                <MDTypography variant="h5" color="text">
-                  Last 10 Bookings
-                </MDTypography>
-                <DataTable
-                  table={{ columns, rows: lastBookings }}
-                  isSorted={false}
-                  entriesPerPage={true}
-                  showTotalEntries={false}
-                  noEndBorder
-                />
-              </MDBox>
-            </Grid>
-          </Grid>
-        </MDBox>
       </MDBox>
       <Footer />
     </DashboardLayout>

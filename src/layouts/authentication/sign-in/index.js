@@ -52,10 +52,10 @@ function Basic() {
 
   return (
     <BasicLayout image={bgImage}>
-      <Card>
+      <Card sx={{ backgroundColor: '#FFFFFF' }}> {/* Changed background color to white */}
         <MDBox
           variant="gradient"
-          bgColor="info"
+          bgColor="#f5f5f5"
           borderRadius="lg"
           coloredShadow="info"
           mx={2}
@@ -63,6 +63,7 @@ function Basic() {
           p={2}
           mb={1}
           textAlign="center"
+          
         >
           {/* Add the logo at the top */}
           <MDBox mb={5}>
