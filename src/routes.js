@@ -45,6 +45,8 @@ import Creators from "layouts/tables/Creators";
 import { Podcasts } from "@mui/icons-material";
 import Podcastscomp from "layouts/tables/Podcasts";
 import Audiobooks from "layouts/tables/Audiobook";
+import Stories from "layouts/tables/Stories";
+import UserInfo from "layouts/tables/Users";
 
 
 const routes = [
@@ -55,6 +57,15 @@ const routes = [
     icon: <Icon fontSize="small">dashboard</Icon>,
     route: "/dashboard",
     component: <NEWDashboard />,
+  },
+
+  {
+    type: "collapse",
+    name: "Users",
+    key: "Users",
+    icon: <Icon fontSize="small">group</Icon>,
+    route: "/Users",
+    component: <UserInfo/>,
   },
 
   {
@@ -109,6 +120,20 @@ const routes = [
       </i>
     ), 
     component: <Audiobooks/>, 
+    layout: "/admin",
+  },
+
+  {
+    type: "collapse",
+    name: " Stories", // Adding the Students menu item
+    key: "Stories",
+    route: "/Stories",
+    icon: (
+      <i className="material-icons" style={{ color: "white" }}>
+        group
+      </i>
+    ), 
+    component: <Stories/>, 
     layout: "/admin",
   },
 
