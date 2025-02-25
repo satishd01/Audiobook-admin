@@ -20,7 +20,12 @@ function NEWDashboard() {
   useEffect(() => {
     const fetchDashboardData = async () => {
       try {
-        const response = await axios.get("https://bluecollar.sndktech.online/api/dashboard/data");
+        const token = localStorage.getItem("token");
+        const response = await axios.get("https://audiobook.shellcode.cloud/api/dashboard", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         if (response.data) {
           setDashboardData(response.data.data);
         }

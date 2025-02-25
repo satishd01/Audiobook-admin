@@ -14,11 +14,6 @@ import {
   Grid,
   Card,
   Box,
-  IconButton,
-  InputAdornment,
-  Checkbox,
-  ListItemText,
-  Autocomplete,
 } from "@mui/material";
 
 // BLISSIQ ADMIN React components
@@ -37,18 +32,20 @@ function Episodes() {
   const [openModal, setOpenModal] = useState(false);
   const [newEpisode, setNewEpisode] = useState({
     title: "",
-    duration: 0,
+    story_id: null,
     podcast_id: null,
     audiobook_id: null,
-    story_id: null,
     name: "",
     season: 1,
     episode: 1,
     description: "",
     creator_name: "",
     image: null,
-    audio_file: null,
+    audio: null,
   });
+  const [podcasts, setPodcasts] = useState([]);
+  const [audiobooks, setAudiobooks] = useState([]);
+  const [stories, setStories] = useState([]);
 
   // Fetch episodes data
   useEffect(() => {
@@ -75,7 +72,73 @@ function Episodes() {
       }
     };
 
+    const fetchPodcasts = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const response = await fetch("https://audiobook.shellcode.cloud/api/admin/podcasts", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        if (data) {
+          setPodcasts(data.data);
+        }
+      } catch (error) {
+        console.error("Error fetching podcasts:", error);
+        alert("Failed to fetch podcasts. Please check your network connection and try again.");
+      }
+    };
+
+    const fetchAudiobooks = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const response = await fetch("https://audiobook.shellcode.cloud/api/audiobooks", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        if (data) {
+          setAudiobooks(data.data);
+        }
+      } catch (error) {
+        console.error("Error fetching audiobooks:", error);
+        alert("Failed to fetch audiobooks. Please check your network connection and try again.");
+      }
+    };
+
+    const fetchStories = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const response = await fetch("https://audiobook.shellcode.cloud/api/stories", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        if (data) {
+          setStories(data.data);
+        }
+      } catch (error) {
+        console.error("Error fetching stories:", error);
+        alert("Failed to fetch stories. Please check your network connection and try again.");
+      }
+    };
+
     fetchEpisodes();
+    fetchPodcasts();
+    fetchAudiobooks();
+    fetchStories();
   }, []);
 
   const handleCreateEpisode = async () => {
@@ -83,10 +146,9 @@ function Episodes() {
       const token = localStorage.getItem("token");
       const formData = new FormData();
       formData.append('title', newEpisode.title);
-      formData.append('duration', newEpisode.duration);
+      formData.append('story_id', newEpisode.story_id);
       formData.append('podcast_id', newEpisode.podcast_id);
       formData.append('audiobook_id', newEpisode.audiobook_id);
-      formData.append('story_id', newEpisode.story_id);
       formData.append('name', newEpisode.name);
       formData.append('season', newEpisode.season);
       formData.append('episode', newEpisode.episode);
@@ -95,11 +157,11 @@ function Episodes() {
       if (newEpisode.image) {
         formData.append('image', newEpisode.image);
       }
-      if (newEpisode.audio_file) {
-        formData.append('audio_file', newEpisode.audio_file);
+      if (newEpisode.audio) {
+        formData.append('audio', newEpisode.audio);
       }
 
-      const response = await fetch("https://audiobook.shellcode.cloud/api/admin/episodes/all", {
+      const response = await fetch("https://audiobook.shellcode.cloud/api/admin/episodes", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -121,17 +183,16 @@ function Episodes() {
         setOpenModal(false);
         setNewEpisode({
           title: "",
-          duration: 0,
+          story_id: null,
           podcast_id: null,
           audiobook_id: null,
-          story_id: null,
           name: "",
           season: 1,
           episode: 1,
           description: "",
           creator_name: "",
           image: null,
-          audio_file: null,
+          audio: null,
         });
         alert("Episode created successfully!");
       } else {
@@ -148,10 +209,9 @@ function Episodes() {
       const token = localStorage.getItem("token");
       const formData = new FormData();
       formData.append('title', newEpisode.title);
-      formData.append('duration', newEpisode.duration);
+      formData.append('story_id', newEpisode.story_id);
       formData.append('podcast_id', newEpisode.podcast_id);
       formData.append('audiobook_id', newEpisode.audiobook_id);
-      formData.append('story_id', newEpisode.story_id);
       formData.append('name', newEpisode.name);
       formData.append('season', newEpisode.season);
       formData.append('episode', newEpisode.episode);
@@ -160,12 +220,12 @@ function Episodes() {
       if (newEpisode.image) {
         formData.append('image', newEpisode.image);
       }
-      if (newEpisode.audio_file) {
-        formData.append('audio_file', newEpisode.audio_file);
+      if (newEpisode.audio) {
+        formData.append('audio', newEpisode.audio);
       }
 
       const response = await fetch(
-        `https://audiobook.shellcode.cloud/api/admin/episodes/all/${newEpisode.id}`,
+        `https://audiobook.shellcode.cloud/api/admin/episodes/${newEpisode.id}`,
         {
           method: "PUT",
           headers: {
@@ -188,17 +248,16 @@ function Episodes() {
         setOpenModal(false);
         setNewEpisode({
           title: "",
-          duration: 0,
+          story_id: null,
           podcast_id: null,
           audiobook_id: null,
-          story_id: null,
           name: "",
           season: 1,
           episode: 1,
           description: "",
           creator_name: "",
           image: null,
-          audio_file: null,
+          audio: null,
         });
         alert("Episode updated successfully!");
       } else {
@@ -216,7 +275,7 @@ function Episodes() {
       try {
         const token = localStorage.getItem("token");
         const response = await fetch(
-          `https://audiobook.shellcode.cloud/api/admin/episodes/all/${episodeId}`,
+          `https://audiobook.shellcode.cloud/api/admin/episodes/${episodeId}`,
           {
             method: "DELETE",
             headers: {
@@ -245,7 +304,7 @@ function Episodes() {
   };
 
   const handleInputChange = (e) => {
-    if (e.target.name === 'image' || e.target.name === 'audio_file') {
+    if (e.target.name === 'image' || e.target.name === 'audio') {
       setNewEpisode({ ...newEpisode, [e.target.name]: e.target.files[0] });
     } else {
       setNewEpisode({ ...newEpisode, [e.target.name]: e.target.value });
@@ -260,17 +319,16 @@ function Episodes() {
     } else {
       setNewEpisode({
         title: "",
-        duration: 0,
+        story_id: null,
         podcast_id: null,
         audiobook_id: null,
-        story_id: null,
         name: "",
         season: 1,
         episode: 1,
         description: "",
         creator_name: "",
         image: null,
-        audio_file: null,
+        audio: null,
       });
     }
     setOpenModal(true);
@@ -312,7 +370,6 @@ function Episodes() {
         />
       ),
     },
-    { Header: "Duration", accessor: "duration" },
     { Header: "Podcast ID", accessor: "podcast_id" },
     { Header: "Audiobook ID", accessor: "audiobook_id" },
     { Header: "Story ID", accessor: "story_id" },
@@ -322,28 +379,23 @@ function Episodes() {
     { Header: "Description", accessor: "description" },
     { Header: "Creator Name", accessor: "creator_name" },
     {
-      Header: "Download Audio",
-      accessor: "audio_file",
+      Header: "Audio",
+      accessor: "audio",
       Cell: ({ row }) => (
         <Button
           variant="contained"
-          color="primary"
+          color="error"
           onClick={() => {
             const audioUrl = row.original.audio_file;
             if (audioUrl) {
-              const link = document.createElement('a');
-              link.href = audioUrl;
-              link.download = row.original.title + '.mp3';
-              document.body.appendChild(link);
-              link.click();
-              document.body.removeChild(link);
+              window.open(audioUrl, '_blank');
             } else {
               alert('No audio file available');
             }
           }}
           sx={{ marginLeft: 1 }}
         >
-          Download
+          Audio
         </Button>
       ),
     },
@@ -351,14 +403,24 @@ function Episodes() {
       Header: "Actions",
       accessor: "actions",
       Cell: ({ row }) => (
-        <Button
-          variant="contained"
-          color="error"
-          onClick={() => handleDeleteEpisode(row.original.id)}
-          sx={{ marginLeft: 1 }}
-        >
-          Delete
-        </Button>
+        <>
+          <Button
+            variant="contained"
+            color="error"
+            onClick={() => handleOpenModal(row.original)}
+            sx={{ marginLeft: 1 }}
+          >
+            Edit
+          </Button>
+          <Button
+            variant="contained"
+            color="error"
+            onClick={() => handleDeleteEpisode(row.original.id)}
+            sx={{ marginLeft: 1 }}
+          >
+            Delete
+          </Button>
+        </>
       ),
     },
   ];
@@ -372,7 +434,7 @@ function Episodes() {
             <Card>
               <MDBox mx={2} mt={-3} py={3} px={2} variant="gradient" bgColor="info" borderRadius="lg" coloredShadow="info">
                 <MDTypography variant="h6" color="white">
-                  Episodes Table
+                  Episodes 
                 </MDTypography>
               </MDBox>
               <MDBox pt={3} sx={{ display: "flex", flexDirection: "column", height: "400px" }}>
@@ -415,42 +477,57 @@ function Episodes() {
             onChange={handleInputChange}
             margin="normal"
           />
-          <TextField
-            label="Duration"
-            fullWidth
-            name="duration"
-            type="number"
-            value={newEpisode.duration}
-            onChange={handleInputChange}
-            margin="normal"
-          />
-          <TextField
-            label="Podcast ID"
-            fullWidth
-            name="podcast_id"
-            type="number"
-            value={newEpisode.podcast_id}
-            onChange={handleInputChange}
-            margin="normal"
-          />
-          <TextField
-            label="Audiobook ID"
-            fullWidth
-            name="audiobook_id"
-            type="number"
-            value={newEpisode.audiobook_id}
-            onChange={handleInputChange}
-            margin="normal"
-          />
-          <TextField
-            label="Story ID"
-            fullWidth
-            name="story_id"
-            type="number"
-            value={newEpisode.story_id}
-            onChange={handleInputChange}
-            margin="normal"
-          />
+          <FormControl fullWidth margin="normal">
+            <InputLabel id="story-select-label">Story</InputLabel>
+            <Select
+              labelId="story-select-label"
+              id="story-select"
+              name="story_id"
+              value={newEpisode.story_id}
+              onChange={handleInputChange}
+              label="Story"
+            >
+              {stories.map((story) => (
+                <MenuItem key={story.id} value={story.id}>
+                  {story.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <FormControl fullWidth margin="normal">
+            <InputLabel id="podcast-select-label">Podcast</InputLabel>
+            <Select
+              labelId="podcast-select-label"
+              id="podcast-select"
+              name="podcast_id"
+              value={newEpisode.podcast_id}
+              onChange={handleInputChange}
+              label="Podcast"
+            >
+              {podcasts.map((podcast) => (
+                <MenuItem key={podcast.id} value={podcast.id}>
+                  {podcast.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <FormControl fullWidth margin="normal">
+            <InputLabel id="audiobook-select-label">Audiobook</InputLabel>
+            <Select
+              labelId="audiobook-select-label"
+              id="audiobook-select"
+              name="audiobook_id"
+              value={newEpisode.audiobook_id}
+              onChange={handleInputChange}
+              label="Audiobook"
+            >
+              {audiobooks.map((audiobook) => (
+                <MenuItem key={audiobook.id} value={audiobook.id}>
+                  {audiobook.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
           <TextField
             label="Name"
             fullWidth
@@ -498,11 +575,14 @@ function Episodes() {
             name="image"
             onChange={handleInputChange}
           />
+          <p>Upload Image</p>
+            
           <input
             type="file"
-            name="audio_file"
+            name="audio"
             onChange={handleInputChange}
           />
+             <p>Upload Audio</p>
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setOpenModal(false)} color="primary">

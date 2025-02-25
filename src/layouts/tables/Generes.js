@@ -158,7 +158,7 @@ function Genres() {
       try {
         const token = localStorage.getItem("token");
         const response = await fetch(
-          `https://audiobook.shellcode.cloud/api/admin/genre/all/${genreId}`,
+          `https://audiobook.shellcode.cloud/api/admin/genre/${genreId}`,
           {
             method: "DELETE",
             headers: {
@@ -244,8 +244,8 @@ function Genres() {
         />
       ),
     },
-    { Header: "Created At", accessor: "created_at" },
-    { Header: "Updated At", accessor: "updated_at" },
+    // { Header: "Created At", accessor: "created_at" },
+    // { Header: "Updated At", accessor: "updated_at" },
     {
       Header: "Actions",
       accessor: "actions",
@@ -253,7 +253,7 @@ function Genres() {
         <div>
           <Button
             variant="contained"
-            color="primary"
+            color="error"
             onClick={() => handleOpenModal(row.original)}
             sx={{ marginLeft: 1 }}
           >
@@ -281,7 +281,7 @@ function Genres() {
             <Card>
               <MDBox mx={2} mt={-3} py={3} px={2} variant="gradient" bgColor="info" borderRadius="lg" coloredShadow="info">
                 <MDTypography variant="h6" color="white">
-                  Genres Table
+                  Genres 
                 </MDTypography>
               </MDBox>
               <MDBox pt={3} sx={{ display: "flex", flexDirection: "column", height: "400px" }}>

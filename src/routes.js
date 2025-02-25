@@ -61,8 +61,8 @@ const routes = [
 
   {
     type: "collapse",
-    name: "Users",
-    key: "Users",
+    name: "User",
+    key: "User",
     icon: <Icon fontSize="small">group</Icon>,
     route: "/Users",
     component: <UserInfo/>,
@@ -83,7 +83,7 @@ const routes = [
   },
   {
     type: "collapse",
-    name: " Creators", // Adding the Students menu item
+    name: " Creator", // Adding the Students menu item
     key: "Creators",
     route: "/Creators",
     icon: (
@@ -97,7 +97,7 @@ const routes = [
 
   {
     type: "collapse",
-    name: " podcast", // Adding the Students menu item
+    name: " Podcast", // Adding the Students menu item
     key: "podcast",
     route: "/podcast",
     icon: (
@@ -111,7 +111,7 @@ const routes = [
 
   {
     type: "collapse",
-    name: " audiobook", // Adding the Students menu item
+    name: " Audiobook", // Adding the Students menu item
     key: "audiobook",
     route: "/audiobook",
     icon: (
@@ -125,7 +125,7 @@ const routes = [
 
   {
     type: "collapse",
-    name: " Stories", // Adding the Students menu item
+    name: " Story", // Adding the Students menu item
     key: "Stories",
     route: "/Stories",
     icon: (
@@ -139,7 +139,7 @@ const routes = [
 
   {
     type: "collapse",
-    name: " Episodes", // Adding the Students menu item
+    name: " Episode", // Adding the Students menu item
     key: "Episodes",
     route: "/Episodes",
     icon: (

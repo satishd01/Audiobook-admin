@@ -339,7 +339,7 @@ function Podcasts() {
         <div>
           <Button
             variant="contained"
-            color="primary"
+            color="error"
             onClick={() => handleOpenModal(row.original)}
             sx={{ marginLeft: 1 }}
           >
@@ -367,7 +367,7 @@ function Podcasts() {
             <Card>
               <MDBox mx={2} mt={-3} py={3} px={2} variant="gradient" bgColor="info" borderRadius="lg" coloredShadow="info">
                 <MDTypography variant="h6" color="white">
-                  Podcasts Table
+                  Podcasts 
                 </MDTypography>
               </MDBox>
               <MDBox pt={3} sx={{ display: "flex", flexDirection: "column", height: "400px" }}>

@@ -195,8 +195,8 @@ function UserInfo() {
     { Header: "Email", accessor: "email" },
     { Header: "Mobile Number", accessor: "mobile_number" },
     { Header: "Genre", accessor: "genre" },
-    { Header: "Created At", accessor: "created_at" },
-    { Header: "Updated At", accessor: "updated_at" },
+    // { Header: "Created At", accessor: "created_at" },
+    // { Header: "Updated At", accessor: "updated_at" },
     {
       Header: "Actions",
       accessor: "actions",
@@ -204,7 +204,7 @@ function UserInfo() {
         <>
           <Button
             variant="contained"
-            color="primary"
+            color="error"
             onClick={() => handleOpenModal(row.original)}
             sx={{ marginLeft: 1 }}
           >
@@ -232,7 +232,7 @@ function UserInfo() {
             <Card>
               <MDBox mx={2} mt={-3} py={3} px={2} variant="gradient" bgColor="info" borderRadius="lg" coloredShadow="info">
                 <MDTypography variant="h6" color="white">
-                  User Information Table
+                  Users
                 </MDTypography>
               </MDBox>
               <MDBox pt={3} sx={{ display: "flex", flexDirection: "column", height: "400px" }}>
