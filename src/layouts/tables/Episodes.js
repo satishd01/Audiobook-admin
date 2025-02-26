@@ -52,7 +52,7 @@ function Episodes() {
     const fetchEpisodes = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await fetch("https://audiobook.shellcode.cloud/api/admin/episodes/all", {
+        const response = await fetch("https://audiobook.shellcode.cloud/api/admin/allEpisodes", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
