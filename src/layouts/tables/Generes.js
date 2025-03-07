@@ -73,7 +73,7 @@ function Genres() {
         formData.append('image', newGenre.image);
       }
 
-      const response = await fetch("https://audiobook.shellcode.cloud/api/admin/genre/all", {
+      const response = await fetch("https://audiobook.shellcode.cloud/api/admin/genre", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -117,7 +117,7 @@ function Genres() {
       }
 
       const response = await fetch(
-        `https://audiobook.shellcode.cloud/api/admin/genre/all/${newGenre.id}`,
+        `https://audiobook.shellcode.cloud/api/admin/genre/${newGenre.id}`,
         {
           method: "PUT",
           headers: {

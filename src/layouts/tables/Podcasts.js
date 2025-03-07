@@ -59,7 +59,7 @@ function Podcasts() {
         }
         const data = await response.json();
         if (data && data.message === "All podcasts fetched successfully") {
-          setPodcasts(data.data);
+          setPodcasts(data.data.reverse());
         }
       } catch (error) {
         console.error("Error fetching podcasts:", error);

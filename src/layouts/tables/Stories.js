@@ -14,6 +14,7 @@ import {
   Select,
   InputLabel,
   FormControl,
+  Autocomplete
 } from "@mui/material";
 
 // BLISSIQ ADMIN React components
@@ -415,95 +416,77 @@ function Stories() {
 
       {/* Modal for creating or editing story */}
       <Dialog open={openModal} onClose={() => setOpenModal(false)}>
-        <DialogTitle>{newStory.id ? "Edit Story" : "Create Story"}</DialogTitle>
-        <DialogContent>
-          <TextField
-            label="Name"
-            fullWidth
-            name="name"
-            value={newStory.name}
-            onChange={handleInputChange}
-            margin="normal"
-          />
-          <TextField
-            label="Show Title"
-            fullWidth
-            name="show_title"
-            value={newStory.show_title}
-            onChange={handleInputChange}
-            margin="normal"
-          />
-          <TextField
-            label="Description"
-            fullWidth
-            name="description"
-            value={newStory.description}
-            onChange={handleInputChange}
-            margin="normal"
-          />
-          <FormControl fullWidth margin="normal">
-            <InputLabel id="creator-select-label">Creator</InputLabel>
-            <Select
-              labelId="creator-select-label"
-              id="creator-select"
-              name="creator_id"
-              value={newStory.creator_id}
-              onChange={(e) => {
-                const selectedCreator = creators.find((creator) => creator.id === parseInt(e.target.value, 10));
-                setNewStory({
-                  ...newStory,
-                  creator_id: e.target.value,
-                  creator_name: selectedCreator ? selectedCreator.creatorName : "",
-                });
-              }}
-              label="Creator"
-            >
-              {creators.map((creator) => (
-                <MenuItem key={creator.id} value={creator.id}>
-                  {creator.creatorName}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-          <FormControl fullWidth margin="normal">
-            <InputLabel id="genre-select-label">Genre</InputLabel>
-            <Select
-              labelId="genre-select-label"
-              id="genre-select"
-              name="genre_id"
-              value={newStory.genre_id}
-              onChange={(e) => {
-                const selectedGenre = genres.find((genre) => genre.id === parseInt(e.target.value, 10));
-                setNewStory({
-                  ...newStory,
-                  genre_id: e.target.value,
-                  genre_name: selectedGenre ? selectedGenre.genre_name : "",
-                });
-              }}
-              label="Genre"
-            >
-              {genres.map((genre) => (
-                <MenuItem key={genre.id} value={genre.id}>
-                  {genre.genre_name}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-          <input
-            type="file"
-            name="image"
-            onChange={handleInputChange}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setOpenModal(false)} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={newStory.id ? handleUpdateStory : handleCreateStory} color="primary">
-            {newStory.id ? "Update" : "Create"}
-          </Button>
-        </DialogActions>
-      </Dialog>
+  <DialogTitle>{newStory.id ? "Edit Story" : "Create Story"}</DialogTitle>
+  <DialogContent>
+    <TextField
+      label="Name"
+      fullWidth
+      name="name"
+      value={newStory.name}
+      onChange={handleInputChange}
+      margin="normal"
+    />
+    <TextField
+      label="Show Title"
+      fullWidth
+      name="show_title"
+      value={newStory.show_title}
+      onChange={handleInputChange}
+      margin="normal"
+    />
+    <TextField
+      label="Description"
+      fullWidth
+      name="description"
+      value={newStory.description}
+      onChange={handleInputChange}
+      margin="normal"
+    />
+    <Autocomplete
+      options={creators}
+      getOptionLabel={(option) => option.creatorName}
+      value={creators.find((creator) => creator.id === newStory.creator_id) || null}
+      onChange={(event, value) => setNewStory({ ...newStory, creator_id: value?.id, creator_name: value?.creatorName })}
+      renderInput={(params) => (
+        <TextField
+          {...params}
+          label="Creator"
+          fullWidth
+          name="creator_id"
+          margin="normal"
+        />
+      )}
+    />
+    <Autocomplete
+      options={genres}
+      getOptionLabel={(option) => option.genre_name}
+      value={genres.find((genre) => genre.id === newStory.genre_id) || null}
+      onChange={(event, value) => setNewStory({ ...newStory, genre_id: value?.id, genre_name: value?.genre_name })}
+      renderInput={(params) => (
+        <TextField
+          {...params}
+          label="Genre"
+          fullWidth
+          name="genre_id"
+          margin="normal"
+        />
+      )}
+    />
+    <input
+      type="file"
+      name="image"
+      onChange={handleInputChange}
+    />
+  </DialogContent>
+  <DialogActions>
+    <Button onClick={() => setOpenModal(false)} color="primary">
+      Cancel
+    </Button>
+    <Button onClick={newStory.id ? handleUpdateStory : handleCreateStory} color="primary">
+      {newStory.id ? "Update" : "Create"}
+    </Button>
+  </DialogActions>
+</Dialog>
     </DashboardLayout>
   );
 }

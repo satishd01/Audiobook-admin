@@ -10,10 +10,6 @@ import {
   Grid,
   Card,
   Box,
-  IconButton,
-  InputAdornment,
-  Checkbox,
-  ListItemText,
   Autocomplete,
 } from "@mui/material";
 
@@ -29,13 +25,13 @@ import DataTable from "examples/Tables/DataTable";
 
 function Creators() {
   const [creators, setCreators] = useState([]);
+  const [genres, setGenres] = useState([]);
   const [loading, setLoading] = useState(true);
   const [openModal, setOpenModal] = useState(false);
   const [newCreator, setNewCreator] = useState({
     showTitle: "",
     creatorName: "",
     creatorType: "",
-    genre_name: "",
     genre_id: null,
     ageRestriction: "",
     starRating: "",
@@ -59,7 +55,7 @@ function Creators() {
         }
         const data = await response.json();
         if (data && Array.isArray(data)) {
-          setCreators(data);
+          setCreators(data.reverse());
         }
       } catch (error) {
         console.error("Error fetching creators:", error);
@@ -69,7 +65,29 @@ function Creators() {
       }
     };
 
+    const fetchGenres = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const response = await fetch("https://audiobook.shellcode.cloud/api/admin/genre/all", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        if (data && data.data) {
+          setGenres(data.data);
+        }
+      } catch (error) {
+        console.error("Error fetching genres:", error);
+        alert("Failed to fetch genres. Please check your network connection and try again.");
+      }
+    };
+
     fetchCreators();
+    fetchGenres();
   }, []);
 
   const handleCreateCreator = async () => {
@@ -79,8 +97,7 @@ function Creators() {
       formData.append('showTitle', newCreator.showTitle);
       formData.append('creatorName', newCreator.creatorName);
       formData.append('creatorType', newCreator.creatorType);
-      formData.append('genre_name', newCreator.genre_name);
-      formData.append('genre_id', newCreator.genre_id);
+      formData.append('genre_id', newCreator.genre_id); // Ensure genre_id is included
       formData.append('ageRestriction', newCreator.ageRestriction);
       formData.append('starRating', newCreator.starRating);
       formData.append('description', newCreator.description);
@@ -89,7 +106,7 @@ function Creators() {
         formData.append('image', newCreator.image);
       }
 
-      const response = await fetch("https://audiobook.shellcode.cloud/api/admin/creator", {
+      const response = await fetch("https://audiobook.shellcode.cloud/api/admin/creator/create", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -113,7 +130,6 @@ function Creators() {
           showTitle: "",
           creatorName: "",
           creatorType: "",
-          genre_name: "",
           genre_id: null,
           ageRestriction: "",
           starRating: "",
@@ -138,8 +154,7 @@ function Creators() {
       formData.append('showTitle', newCreator.showTitle);
       formData.append('creatorName', newCreator.creatorName);
       formData.append('creatorType', newCreator.creatorType);
-      formData.append('genre_name', newCreator.genre_name);
-      formData.append('genre_id', newCreator.genre_id);
+      formData.append('genre_id', newCreator.genre_id); // Ensure genre_id is included
       formData.append('ageRestriction', newCreator.ageRestriction);
       formData.append('starRating', newCreator.starRating);
       formData.append('description', newCreator.description);
@@ -174,7 +189,6 @@ function Creators() {
           showTitle: "",
           creatorName: "",
           creatorType: "",
-          genre_name: "",
           genre_id: null,
           ageRestriction: "",
           starRating: "",
@@ -198,7 +212,7 @@ function Creators() {
       try {
         const token = localStorage.getItem("token");
         const response = await fetch(
-          `https://audiobook.shellcode.cloud/api/admin/creator/${creatorId}`,
+          `https://audiobook.shellcode.cloud/api/admin/creator/creators/${creatorId}`,
           {
             method: "DELETE",
             headers: {
@@ -244,7 +258,6 @@ function Creators() {
         showTitle: "",
         creatorName: "",
         creatorType: "",
-        genre_name: "",
         genre_id: null,
         ageRestriction: "",
         starRating: "",
@@ -393,22 +406,19 @@ function Creators() {
             onChange={handleInputChange}
             margin="normal"
           />
-          <TextField
-            label="Genre Name"
-            fullWidth
-            name="genre_name"
-            value={newCreator.genre_name}
-            onChange={handleInputChange}
-            margin="normal"
-          />
-          <TextField
-            label="Genre ID"
-            fullWidth
-            name="genre_id"
-            type="number"
-            value={newCreator.genre_id}
-            onChange={handleInputChange}
-            margin="normal"
+          <Autocomplete
+            options={genres}
+            getOptionLabel={(option) => option.genre_name}
+            value={genres.find((genre) => genre.id === newCreator.genre_id) || null}
+            onChange={(event, value) => setNewCreator({ ...newCreator, genre_id: value ? value.id : null })}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Genre"
+                fullWidth
+                margin="normal"
+              />
+            )}
           />
           <TextField
             label="Age Restriction"

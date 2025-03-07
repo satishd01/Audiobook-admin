@@ -33,7 +33,7 @@ function Episodes() {
   const [newEpisode, setNewEpisode] = useState({
     title: "",
     story_id: null,
-    podcast_id: null,
+    podcastId: null,
     audiobook_id: null,
     name: "",
     season: 1,
@@ -46,6 +46,7 @@ function Episodes() {
   const [podcasts, setPodcasts] = useState([]);
   const [audiobooks, setAudiobooks] = useState([]);
   const [stories, setStories] = useState([]);
+  const [selectedMediaType, setSelectedMediaType] = useState(null);
 
   // Fetch episodes data
   useEffect(() => {
@@ -62,7 +63,7 @@ function Episodes() {
         }
         const data = await response.json();
         if (data && data.success && data.data) {
-          setEpisodes(data.data);
+          setEpisodes(data.data.reverse());
         }
       } catch (error) {
         console.error("Error fetching episodes:", error);
@@ -146,9 +147,6 @@ function Episodes() {
       const token = localStorage.getItem("token");
       const formData = new FormData();
       formData.append('title', newEpisode.title);
-      formData.append('story_id', newEpisode.story_id);
-      formData.append('podcast_id', newEpisode.podcast_id);
-      formData.append('audiobook_id', newEpisode.audiobook_id);
       formData.append('name', newEpisode.name);
       formData.append('season', newEpisode.season);
       formData.append('episode', newEpisode.episode);
@@ -159,6 +157,14 @@ function Episodes() {
       }
       if (newEpisode.audio) {
         formData.append('audio', newEpisode.audio);
+      }
+
+      if (selectedMediaType === 'story') {
+        formData.append('story_id', newEpisode.story_id);
+      } else if (selectedMediaType === 'podcast') {
+        formData.append('podcastId', newEpisode.podcastId);
+      } else if (selectedMediaType === 'audiobook') {
+        formData.append('audiobook_id', newEpisode.audiobook_id);
       }
 
       const response = await fetch("https://audiobook.shellcode.cloud/api/admin/episodes", {
@@ -184,7 +190,7 @@ function Episodes() {
         setNewEpisode({
           title: "",
           story_id: null,
-          podcast_id: null,
+          podcastId: null,
           audiobook_id: null,
           name: "",
           season: 1,
@@ -194,6 +200,7 @@ function Episodes() {
           image: null,
           audio: null,
         });
+        setSelectedMediaType(null);
         alert("Episode created successfully!");
       } else {
         alert(result.message || "Failed to create episode");
@@ -209,9 +216,6 @@ function Episodes() {
       const token = localStorage.getItem("token");
       const formData = new FormData();
       formData.append('title', newEpisode.title);
-      formData.append('story_id', newEpisode.story_id);
-      formData.append('podcast_id', newEpisode.podcast_id);
-      formData.append('audiobook_id', newEpisode.audiobook_id);
       formData.append('name', newEpisode.name);
       formData.append('season', newEpisode.season);
       formData.append('episode', newEpisode.episode);
@@ -222,6 +226,14 @@ function Episodes() {
       }
       if (newEpisode.audio) {
         formData.append('audio', newEpisode.audio);
+      }
+
+      if (selectedMediaType === 'story') {
+        formData.append('story_id', newEpisode.story_id);
+      } else if (selectedMediaType === 'podcast') {
+        formData.append('podcastId', newEpisode.podcastId);
+      } else if (selectedMediaType === 'audiobook') {
+        formData.append('audiobook_id', newEpisode.audiobook_id);
       }
 
       const response = await fetch(
@@ -249,7 +261,7 @@ function Episodes() {
         setNewEpisode({
           title: "",
           story_id: null,
-          podcast_id: null,
+          podcastId: null,
           audiobook_id: null,
           name: "",
           season: 1,
@@ -259,6 +271,7 @@ function Episodes() {
           image: null,
           audio: null,
         });
+        setSelectedMediaType(null);
         alert("Episode updated successfully!");
       } else {
         alert(result.message || "Failed to update episode");
@@ -316,11 +329,12 @@ function Episodes() {
       setNewEpisode({
         ...episode,
       });
+      setSelectedMediaType(episode.story_id ? 'story' : episode.podcastId ? 'podcast' : 'audiobook');
     } else {
       setNewEpisode({
         title: "",
         story_id: null,
-        podcast_id: null,
+        podcastId: null,
         audiobook_id: null,
         name: "",
         season: 1,
@@ -330,6 +344,7 @@ function Episodes() {
         image: null,
         audio: null,
       });
+      setSelectedMediaType(null);
     }
     setOpenModal(true);
   };
@@ -370,7 +385,7 @@ function Episodes() {
         />
       ),
     },
-    { Header: "Podcast ID", accessor: "podcast_id" },
+    { Header: "Podcast ID", accessor: "podcastId" },
     { Header: "Audiobook ID", accessor: "audiobook_id" },
     { Header: "Story ID", accessor: "story_id" },
     { Header: "Name", accessor: "name" },
@@ -478,56 +493,161 @@ function Episodes() {
             margin="normal"
           />
           <FormControl fullWidth margin="normal">
-            <InputLabel id="story-select-label">Story</InputLabel>
+            <InputLabel id="media-type-select-label">Media Type</InputLabel>
             <Select
-              labelId="story-select-label"
-              id="story-select"
-              name="story_id"
-              value={newEpisode.story_id}
-              onChange={handleInputChange}
-              label="Story"
+              labelId="media-type-select-label"
+              id="media-type-select"
+              name="mediaType"
+              value={selectedMediaType}
+              onChange={(e) => setSelectedMediaType(e.target.value)}
+              label="Media Type"
+                sx={{
+                            backgroundColor: "#ffffff",
+                            borderRadius: "10px",
+                            color: "black",
+                            height: "40px",
+                            fontSize: "1rem",
+                            "& .MuiInputBase-root": {
+                              color: "black",
+                            },
+                            "& .MuiOutlinedInput-root": {
+                              "& fieldset": {
+                                borderColor: "black",
+                              },
+                              "&:hover fieldset": {
+                                borderColor: "black",
+                              },
+                              "&.Mui-focused fieldset": {
+                                borderColor: "black",
+                              },
+                            },
+                          }}
             >
-              {stories.map((story) => (
-                <MenuItem key={story.id} value={story.id}>
-                  {story.name}
-                </MenuItem>
-              ))}
+              <MenuItem value="story">Story</MenuItem>
+              <MenuItem value="podcast">Podcast</MenuItem>
+              <MenuItem value="audiobook">Audiobook</MenuItem>
             </Select>
           </FormControl>
-          <FormControl fullWidth margin="normal">
-            <InputLabel id="podcast-select-label">Podcast</InputLabel>
-            <Select
-              labelId="podcast-select-label"
-              id="podcast-select"
-              name="podcast_id"
-              value={newEpisode.podcast_id}
-              onChange={handleInputChange}
-              label="Podcast"
-            >
-              {podcasts.map((podcast) => (
-                <MenuItem key={podcast.id} value={podcast.id}>
-                  {podcast.name}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-          <FormControl fullWidth margin="normal">
-            <InputLabel id="audiobook-select-label">Audiobook</InputLabel>
-            <Select
-              labelId="audiobook-select-label"
-              id="audiobook-select"
-              name="audiobook_id"
-              value={newEpisode.audiobook_id}
-              onChange={handleInputChange}
-              label="Audiobook"
-            >
-              {audiobooks.map((audiobook) => (
-                <MenuItem key={audiobook.id} value={audiobook.id}>
-                  {audiobook.name}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
+          {selectedMediaType === 'story' && (
+            <FormControl fullWidth margin="normal">
+              <InputLabel id="story-select-label">Story</InputLabel>
+              <Select
+                labelId="story-select-label"
+                id="story-select"
+                name="story_id"
+                value={newEpisode.story_id}
+                onChange={handleInputChange}
+                label="Story"
+                  sx={{
+                              backgroundColor: "#ffffff",
+                              borderRadius: "10px",
+                              color: "black",
+                              height: "40px",
+                              fontSize: "1rem",
+                              "& .MuiInputBase-root": {
+                                color: "black",
+                              },
+                              "& .MuiOutlinedInput-root": {
+                                "& fieldset": {
+                                  borderColor: "black",
+                                },
+                                "&:hover fieldset": {
+                                  borderColor: "black",
+                                },
+                                "&.Mui-focused fieldset": {
+                                  borderColor: "black",
+                                },
+                              },
+                            }}
+              >
+                {stories.map((story) => (
+                  <MenuItem key={story.id} value={story.id}>
+                    {story.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          )}
+          {selectedMediaType === 'podcast' && (
+            <FormControl fullWidth margin="normal">
+              <InputLabel id="podcast-select-label">Podcast</InputLabel>
+              <Select
+                labelId="podcast-select-label"
+                id="podcast-select"
+                name="podcastId"
+                value={newEpisode.podcastId}
+                onChange={handleInputChange}
+                label="Podcast"
+                sx={{
+                  backgroundColor: "#ffffff",
+                  borderRadius: "10px",
+                  color: "black",
+                  height: "40px",
+                  fontSize: "1rem",
+                  "& .MuiInputBase-root": {
+                    color: "black",
+                  },
+                  "& .MuiOutlinedInput-root": {
+                    "& fieldset": {
+                      borderColor: "black",
+                    },
+                    "&:hover fieldset": {
+                      borderColor: "black",
+                    },
+                    "&.Mui-focused fieldset": {
+                      borderColor: "black",
+                    },
+                  },
+                }}
+              >
+                {podcasts.map((podcast) => (
+                  <MenuItem key={podcast.id} value={podcast.id}>
+                    {podcast.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          )}
+          {selectedMediaType === 'audiobook' && (
+            <FormControl fullWidth margin="normal">
+              <InputLabel id="audiobook-select-label">Audiobook</InputLabel>
+              <Select
+                labelId="audiobook-select-label"
+                id="audiobook-select"
+                name="audiobook_id"
+                value={newEpisode.audiobook_id}
+                onChange={handleInputChange}
+                label="Audiobook"
+                sx={{
+                  backgroundColor: "#ffffff",
+                  borderRadius: "10px",
+                  color: "black",
+                  height: "40px",
+                  fontSize: "1rem",
+                  "& .MuiInputBase-root": {
+                    color: "black",
+                  },
+                  "& .MuiOutlinedInput-root": {
+                    "& fieldset": {
+                      borderColor: "black",
+                    },
+                    "&:hover fieldset": {
+                      borderColor: "black",
+                    },
+                    "&.Mui-focused fieldset": {
+                      borderColor: "black",
+                    },
+                  },
+                }}
+              >
+                {audiobooks.map((audiobook) => (
+                  <MenuItem key={audiobook.id} value={audiobook.id}>
+                    {audiobook.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          )}
           <TextField
             label="Name"
             fullWidth
