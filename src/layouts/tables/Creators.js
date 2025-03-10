@@ -41,51 +41,51 @@ function Creators() {
   });
 
   // Fetch creators data
+  const fetchCreators = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch("https://audiobook.shellcode.cloud/api/admin/creator", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      if (data && Array.isArray(data)) {
+        setCreators(data.reverse());
+      }
+    } catch (error) {
+      console.error("Error fetching creators:", error);
+      alert("Failed to fetch creators. Please check your network connection and try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchGenres = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch("https://audiobook.shellcode.cloud/api/admin/genre/all", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      if (data && data.data) {
+        setGenres(data.data);
+      }
+    } catch (error) {
+      console.error("Error fetching genres:", error);
+      alert("Failed to fetch genres. Please check your network connection and try again.");
+    }
+  };
+
   useEffect(() => {
-    const fetchCreators = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        const response = await fetch("https://audiobook.shellcode.cloud/api/admin/creator", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-        if (data && Array.isArray(data)) {
-          setCreators(data.reverse());
-        }
-      } catch (error) {
-        console.error("Error fetching creators:", error);
-        alert("Failed to fetch creators. Please check your network connection and try again.");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    const fetchGenres = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        const response = await fetch("https://audiobook.shellcode.cloud/api/admin/genre/all", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-        if (data && data.data) {
-          setGenres(data.data);
-        }
-      } catch (error) {
-        console.error("Error fetching genres:", error);
-        alert("Failed to fetch genres. Please check your network connection and try again.");
-      }
-    };
-
     fetchCreators();
     fetchGenres();
   }, []);
@@ -119,12 +119,8 @@ function Creators() {
       const result = await response.json();
 
       if (result.message === "Creator created successfully") {
-        setCreators((prev) => [
-          ...prev,
-          {
-            ...result.data,
-          },
-        ]);
+        // Fetch the latest creators data from the server
+        await fetchCreators();
         setOpenModal(false);
         setNewCreator({
           showTitle: "",
@@ -179,11 +175,8 @@ function Creators() {
       const result = await response.json();
 
       if (result.message === "Creator updated successfully") {
-        setCreators((prevCreators) =>
-          prevCreators.map((creator) =>
-            creator.id === newCreator.id ? { ...creator, ...newCreator } : creator
-          )
-        );
+        // Fetch the latest creators data from the server
+        await fetchCreators();
         setOpenModal(false);
         setNewCreator({
           showTitle: "",
@@ -226,9 +219,8 @@ function Creators() {
         const result = await response.json();
 
         if (result.message === "Creator deleted successfully") {
-          setCreators((prevCreators) =>
-            prevCreators.filter((creator) => creator.id !== creatorId)
-          );
+          // Fetch the latest creators data from the server
+          await fetchCreators();
           alert("Creator deleted successfully!");
         } else {
           alert(result.message || "Failed to delete creator");

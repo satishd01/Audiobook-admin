@@ -6,15 +6,9 @@ import {
   DialogContent,
   DialogTitle,
   Button,
-  Typography,
   Grid,
   Card,
-  Box,
-  IconButton,
-  InputAdornment,
-  Checkbox,
-  ListItemText,
-  Autocomplete,
+  CircularProgress,
 } from "@mui/material";
 
 // BLISSIQ ADMIN React components
@@ -35,36 +29,41 @@ function Genres() {
     genre_name: "",
     image: null,
   });
+  const [successMessage, setSuccessMessage] = useState("");
+  const [isCreating, setIsCreating] = useState(false);
+  const [isUpdating, setIsUpdating] = useState(false);
 
   // Fetch genres data
-  useEffect(() => {
-    const fetchGenres = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        const response = await fetch("https://audiobook.shellcode.cloud/api/admin/genre/all", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-        if (data && data.message === "Genres fetched successfully") {
-          setGenres(data.data);
-        }
-      } catch (error) {
-        console.error("Error fetching genres:", error);
-        alert("Failed to fetch genres. Please check your network connection and try again.");
-      } finally {
-        setLoading(false);
+  const fetchGenres = async () => {
+    setLoading(true);
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch("https://audiobook.shellcode.cloud/api/admin/genre/all", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
       }
-    };
+      const data = await response.json();
+      if (data && data.message === "Genres fetched successfully") {
+        setGenres(data.data);
+      }
+    } catch (error) {
+      console.error("Error fetching genres:", error);
+      alert("Failed to fetch genres. Please check your network connection and try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchGenres();
   }, []);
 
   const handleCreateGenre = async () => {
+    setIsCreating(true);
     try {
       const token = localStorage.getItem("token");
       const formData = new FormData();
@@ -86,28 +85,28 @@ function Genres() {
       const result = await response.json();
 
       if (result.message === "Genre created successfully") {
-        setGenres((prev) => [
-          ...prev,
-          {
-            ...result.data,
-          },
-        ]);
+        // Re-fetch genres after successful creation
+        fetchGenres();  // This will ensure the UI reflects the new genre immediately
         setOpenModal(false);
         setNewGenre({
           genre_name: "",
           image: null,
         });
-        alert("Genre created successfully!");
+        setSuccessMessage("Genre created successfully!");
+        setTimeout(() => setSuccessMessage(""), 2000); // Clear message after 3 seconds
       } else {
         alert(result.message || "Failed to create genre");
       }
     } catch (error) {
       console.error("Error creating genre:", error);
       alert("Failed to create genre. Please check your network connection and try again.");
+    } finally {
+      setIsCreating(false);
     }
   };
 
   const handleUpdateGenre = async () => {
+    setIsUpdating(true);
     try {
       const token = localStorage.getItem("token");
       const formData = new FormData();
@@ -142,13 +141,16 @@ function Genres() {
           genre_name: "",
           image: null,
         });
-        alert("Genre updated successfully!");
+        setSuccessMessage("Genre updated successfully!");
+        setTimeout(() => setSuccessMessage(""), 3000); // Clear message after 3 seconds
       } else {
         alert(result.message || "Failed to update genre");
       }
     } catch (error) {
       console.error("Error updating genre:", error);
       alert("Failed to update genre. Please check your network connection and try again.");
+    } finally {
+      setIsUpdating(false);
     }
   };
 
@@ -175,7 +177,8 @@ function Genres() {
           setGenres((prevGenres) =>
             prevGenres.filter((genre) => genre.id !== genreId)
           );
-          alert("Genre deleted successfully!");
+          setSuccessMessage("Genre deleted successfully!");
+          setTimeout(() => setSuccessMessage(""), 3000); // Clear message after 3 seconds
         } else {
           alert(result.message || "Failed to delete genre");
         }
@@ -244,8 +247,6 @@ function Genres() {
         />
       ),
     },
-    // { Header: "Created At", accessor: "created_at" },
-    // { Header: "Updated At", accessor: "updated_at" },
     {
       Header: "Actions",
       accessor: "actions",
@@ -253,7 +254,7 @@ function Genres() {
         <div>
           <Button
             variant="contained"
-            color="error"
+            color="primary"
             onClick={() => handleOpenModal(row.original)}
             sx={{ marginLeft: 1 }}
           >
@@ -290,7 +291,7 @@ function Genres() {
                 </MDBox>
                 <Button
                   variant="contained"
-                  color="white"
+                  color="primary"
                   sx={{
                     position: "absolute",
                     top: 20,
@@ -334,11 +335,29 @@ function Genres() {
           <Button onClick={() => setOpenModal(false)} color="primary">
             Cancel
           </Button>
-          <Button onClick={newGenre.id ? handleUpdateGenre : handleCreateGenre} color="primary">
+          <Button onClick={newGenre.id ? handleUpdateGenre : handleCreateGenre} color="primary" disabled={isCreating || isUpdating}>
             {newGenre.id ? "Update" : "Create"}
           </Button>
         </DialogActions>
       </Dialog>
+
+      {/* Success Message */}
+      {successMessage && (
+        <MDBox
+          sx={{
+            position: "fixed",
+            bottom: 20,
+            right: 20,
+            backgroundColor: "green",
+            color: "white",
+            padding: "10px 20px",
+            borderRadius: "5px",
+            zIndex: 1000,
+          }}
+        >
+          {successMessage}
+        </MDBox>
+      )}
     </DashboardLayout>
   );
 }

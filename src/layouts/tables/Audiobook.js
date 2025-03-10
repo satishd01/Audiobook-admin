@@ -29,7 +29,6 @@ import DataTable from "examples/Tables/DataTable";
 
 function Audiobooks() {
   const [audiobooks, setAudiobooks] = useState([]);
-  console.log(audiobooks,"audiobooks");  
   const [genres, setGenres] = useState([]);
   const [creators, setCreators] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -46,72 +45,72 @@ function Audiobooks() {
   });
 
   // Fetch audiobooks data
+  const fetchAudiobooks = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch("https://audiobook.shellcode.cloud/api/audiobooks", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      if (data && data.success && Array.isArray(data.data)) {
+        setAudiobooks(data.data);
+      }
+    } catch (error) {
+      console.error("Error fetching audiobooks:", error);
+      alert("Failed to fetch audiobooks. Please check your network connection and try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchGenres = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch("https://audiobook.shellcode.cloud/api/admin/genre/all", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      if (data && data.message === "Genres fetched successfully") {
+        setGenres(data.data);
+      }
+    } catch (error) {
+      console.error("Error fetching genres:", error);
+      alert("Failed to fetch genres. Please check your network connection and try again.");
+    }
+  };
+
+  const fetchCreators = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch("https://audiobook.shellcode.cloud/api/admin/creator", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      if (data && Array.isArray(data)) {
+        setCreators(data);
+      }
+    } catch (error) {
+      console.error("Error fetching creators:", error);
+      alert("Failed to fetch creators. Please check your network connection and try again.");
+    }
+  };
+
   useEffect(() => {
-    const fetchAudiobooks = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        const response = await fetch("https://audiobook.shellcode.cloud/api/audiobooks", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-        if (data && data.success && Array.isArray(data.data)) {
-          setAudiobooks(data.data);
-        }
-      } catch (error) {
-        console.error("Error fetching audiobooks:", error);
-        alert("Failed to fetch audiobooks. Please check your network connection and try again.");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    const fetchGenres = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        const response = await fetch("https://audiobook.shellcode.cloud/api/admin/genre/all", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-        if (data && data.message === "Genres fetched successfully") {
-          setGenres(data.data);
-        }
-      } catch (error) {
-        console.error("Error fetching genres:", error);
-        alert("Failed to fetch genres. Please check your network connection and try again.");
-      }
-    };
-
-    const fetchCreators = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        const response = await fetch("https://audiobook.shellcode.cloud/api/admin/creator", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-        if (data && Array.isArray(data)) {
-          setCreators(data);
-        }
-      } catch (error) {
-        console.error("Error fetching creators:", error);
-        alert("Failed to fetch creators. Please check your network connection and try again.");
-      }
-    };
-
     fetchAudiobooks();
     fetchGenres();
     fetchCreators();
@@ -145,13 +144,23 @@ function Audiobooks() {
       const result = await response.json();
 
       if (result.message === "Audiobook created successfully") {
-        setAudiobooks((prev) => [
-          ...prev,
+        // Optimistic update: immediately add the new audiobook to the state
+        setAudiobooks((prevAudiobooks) => [
+          ...prevAudiobooks,
           {
-            ...result.data,
+            id: result.data.id, // Assuming the API returns the new audiobook's ID
+            name: newAudiobook.name,
+            show_title: newAudiobook.show_title,
+            description: newAudiobook.description,
+            creator_id: newAudiobook.creator_id,
+            genre_id: newAudiobook.genre_id,
+            creator_name: newAudiobook.creator_name,
+            genre_name: newAudiobook.genre_name,
+            image: newAudiobook.image ? URL.createObjectURL(newAudiobook.image) : "", // Handle image URL if needed
           },
         ]);
-        setOpenModal(false);
+
+        setOpenModal(false); // Close the modal
         setNewAudiobook({
           name: "",
           show_title: "",
@@ -186,7 +195,7 @@ function Audiobooks() {
       if (newAudiobook.image) {
         formData.append('image', newAudiobook.image);
       }
-  
+
       const response = await fetch(
         `https://audiobook.shellcode.cloud/api/audiobook/${newAudiobook.id}`,
         {
@@ -201,14 +210,16 @@ function Audiobooks() {
         throw new Error('Network response was not ok');
       }
       const result = await response.json();
-  
-      if (result.message) {
+
+      if (result.message === "Audiobook updated successfully") {
+        // Optimistic update: immediately update the audiobook in the state
         setAudiobooks((prevAudiobooks) =>
           prevAudiobooks.map((audiobook) =>
             audiobook.id === newAudiobook.id ? { ...audiobook, ...newAudiobook } : audiobook
           )
         );
-        setOpenModal(false); // Ensure the modal is closed
+
+        setOpenModal(false); // Close the modal
         setNewAudiobook({
           name: "",
           show_title: "",
@@ -249,6 +260,7 @@ function Audiobooks() {
         const result = await response.json();
 
         if (result.message === "Audiobook deleted successfully") {
+          // Optimistic update: immediately remove the audiobook from the state
           setAudiobooks((prevAudiobooks) =>
             prevAudiobooks.filter((audiobook) => audiobook.id !== audiobookId)
           );
@@ -340,7 +352,7 @@ function Audiobooks() {
         <div>
           <Button
             variant="contained"
-            color="error"
+            color="primary"
             onClick={() => handleOpenModal(row.original)}
             sx={{ marginLeft: 1 }}
           >
@@ -377,7 +389,7 @@ function Audiobooks() {
                 </MDBox>
                 <Button
                   variant="contained"
-                  color="white"
+                  color="primary"
                   sx={{
                     position: "absolute",
                     top: 20,

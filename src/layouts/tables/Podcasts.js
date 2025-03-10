@@ -45,72 +45,72 @@ function Podcasts() {
   });
 
   // Fetch podcasts data
+  const fetchPodcasts = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch("https://audiobook.shellcode.cloud/api/admin/podcasts", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      if (data && data.message === "All podcasts fetched successfully") {
+        setPodcasts(data.data.reverse());
+      }
+    } catch (error) {
+      console.error("Error fetching podcasts:", error);
+      alert("Failed to fetch podcasts. Please check your network connection and try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchGenres = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch("https://audiobook.shellcode.cloud/api/admin/genre/all", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      if (data && data.message === "Genres fetched successfully") {
+        setGenres(data.data);
+      }
+    } catch (error) {
+      console.error("Error fetching genres:", error);
+      alert("Failed to fetch genres. Please check your network connection and try again.");
+    }
+  };
+
+  const fetchCreators = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch("https://audiobook.shellcode.cloud/api/admin/creator", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      if (data && Array.isArray(data)) {
+        setCreators(data);
+      }
+    } catch (error) {
+      console.error("Error fetching creators:", error);
+      alert("Failed to fetch creators. Please check your network connection and try again.");
+    }
+  };
+
   useEffect(() => {
-    const fetchPodcasts = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        const response = await fetch("https://audiobook.shellcode.cloud/api/admin/podcasts", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-        if (data && data.message === "All podcasts fetched successfully") {
-          setPodcasts(data.data.reverse());
-        }
-      } catch (error) {
-        console.error("Error fetching podcasts:", error);
-        alert("Failed to fetch podcasts. Please check your network connection and try again.");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    const fetchGenres = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        const response = await fetch("https://audiobook.shellcode.cloud/api/admin/genre/all", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-        if (data && data.message === "Genres fetched successfully") {
-          setGenres(data.data);
-        }
-      } catch (error) {
-        console.error("Error fetching genres:", error);
-        alert("Failed to fetch genres. Please check your network connection and try again.");
-      }
-    };
-
-    const fetchCreators = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        const response = await fetch("https://audiobook.shellcode.cloud/api/admin/creator", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-        if (data && Array.isArray(data)) {
-          setCreators(data);
-        }
-      } catch (error) {
-        console.error("Error fetching creators:", error);
-        alert("Failed to fetch creators. Please check your network connection and try again.");
-      }
-    };
-
     fetchPodcasts();
     fetchGenres();
     fetchCreators();
@@ -144,12 +144,8 @@ function Podcasts() {
       const result = await response.json();
 
       if (result.message === "Podcast created successfully") {
-        setPodcasts((prev) => [
-          ...prev,
-          {
-            ...result.data,
-          },
-        ]);
+        // Fetch the latest podcasts data from the server
+        await fetchPodcasts();
         setOpenModal(false);
         setNewPodcast({
           name: "",
@@ -202,11 +198,8 @@ function Podcasts() {
       const result = await response.json();
 
       if (result.message === "Podcast updated successfully") {
-        setPodcasts((prevPodcasts) =>
-          prevPodcasts.map((podcast) =>
-            podcast.id === newPodcast.id ? { ...podcast, ...newPodcast } : podcast
-          )
-        );
+        // Fetch the latest podcasts data from the server
+        await fetchPodcasts();
         setOpenModal(false);
         setNewPodcast({
           name: "",
@@ -248,9 +241,8 @@ function Podcasts() {
         const result = await response.json();
 
         if (result.message === "Podcast deleted successfully") {
-          setPodcasts((prevPodcasts) =>
-            prevPodcasts.filter((podcast) => podcast.id !== podcastId)
-          );
+          // Fetch the latest podcasts data from the server
+          await fetchPodcasts();
           alert("Podcast deleted successfully!");
         } else {
           alert(result.message || "Failed to delete podcast");
