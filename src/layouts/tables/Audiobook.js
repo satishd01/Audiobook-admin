@@ -57,7 +57,7 @@ function Audiobooks() {
         throw new Error('Network response was not ok');
       }
       const data = await response.json();
-      if (data && data.success && Array.isArray(data.data)) {
+      if (data && data.data) {
         setAudiobooks(data.data);
       }
     } catch (error) {
@@ -143,10 +143,11 @@ function Audiobooks() {
       }
       const result = await response.json();
 
-      if (result.message === "Audiobook created successfully") {
+      if (result.message) {
         // Optimistic update: immediately add the new audiobook to the state
+        fetchAudiobooks()
+        setOpenModal(false); // Close the modal
         setAudiobooks((prevAudiobooks) => [
-          ...prevAudiobooks,
           {
             id: result.data.id, // Assuming the API returns the new audiobook's ID
             name: newAudiobook.name,
@@ -158,9 +159,10 @@ function Audiobooks() {
             genre_name: newAudiobook.genre_name,
             image: newAudiobook.image ? URL.createObjectURL(newAudiobook.image) : "", // Handle image URL if needed
           },
+          ...prevAudiobooks,
         ]);
 
-        setOpenModal(false); // Close the modal
+
         setNewAudiobook({
           name: "",
           show_title: "",
@@ -211,7 +213,9 @@ function Audiobooks() {
       }
       const result = await response.json();
 
-      if (result.message === "Audiobook updated successfully") {
+      if (result.message) {
+        fetchAudiobooks()
+        setOpenModal(false); // Close the modal
         // Optimistic update: immediately update the audiobook in the state
         setAudiobooks((prevAudiobooks) =>
           prevAudiobooks.map((audiobook) =>
@@ -219,7 +223,7 @@ function Audiobooks() {
           )
         );
 
-        setOpenModal(false); // Close the modal
+        
         setNewAudiobook({
           name: "",
           show_title: "",
@@ -259,8 +263,8 @@ function Audiobooks() {
         }
         const result = await response.json();
 
-        if (result.message === "Audiobook deleted successfully") {
-          // Optimistic update: immediately remove the audiobook from the state
+        if (result.message) {
+          fetchAudiobooks()
           setAudiobooks((prevAudiobooks) =>
             prevAudiobooks.filter((audiobook) => audiobook.id !== audiobookId)
           );

@@ -148,10 +148,10 @@ function Stories() {
 
       if (result.success) {
         setStories((prev) => [
-          ...prev,
           {
             ...result.data,
           },
+          ...prev,
         ]);
         setOpenModal(false);
         setNewStory({

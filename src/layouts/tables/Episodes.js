@@ -181,10 +181,10 @@ function Episodes() {
 
       if (result.success) {
         setEpisodes((prev) => [
-          ...prev,
           {
             ...result.data,
           },
+          ...prev,
         ]);
         setOpenModal(false);
         setNewEpisode({
