@@ -207,7 +207,7 @@ function Episodes() {
       }
     } catch (error) {
       console.error("Error creating episode:", error);
-      alert("Failed to create episode. Please check your network connection and try again.");
+      alert("all filds required");
     }
   };
 
