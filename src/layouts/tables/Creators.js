@@ -50,7 +50,7 @@ function Creators() {
         },
       });
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error("Network response was not ok");
       }
       const data = await response.json();
       if (data && Array.isArray(data)) {
@@ -73,7 +73,7 @@ function Creators() {
         },
       });
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error("Network response was not ok");
       }
       const data = await response.json();
       if (data && data.data) {
@@ -94,27 +94,30 @@ function Creators() {
     try {
       const token = localStorage.getItem("token");
       const formData = new FormData();
-      formData.append('showTitle', newCreator.showTitle);
-      formData.append('creatorName', newCreator.creatorName);
-      formData.append('creatorType', newCreator.creatorType);
-      formData.append('genre_id', newCreator.genre_id); // Ensure genre_id is included
-      formData.append('ageRestriction', newCreator.ageRestriction);
-      formData.append('starRating', newCreator.starRating);
-      formData.append('description', newCreator.description);
-      formData.append('listens', newCreator.listens);
+      formData.append("showTitle", newCreator.showTitle);
+      formData.append("creatorName", newCreator.creatorName);
+      formData.append("creatorType", newCreator.creatorType);
+      formData.append("genre_id", newCreator.genre_id); // Ensure genre_id is included
+      formData.append("ageRestriction", newCreator.ageRestriction);
+      formData.append("starRating", newCreator.starRating);
+      formData.append("description", newCreator.description);
+      formData.append("listens", newCreator.listens);
       if (newCreator.image) {
-        formData.append('image', newCreator.image);
+        formData.append("image", newCreator.image);
       }
 
-      const response = await fetch("https://lumeromind.shellcode.website/api/admin/creator/create", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        body: formData,
-      });
+      const response = await fetch(
+        "https://lumeromind.shellcode.website/api/admin/creator/create",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          body: formData,
+        }
+      );
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error("Network response was not ok");
       }
       const result = await response.json();
 
@@ -147,16 +150,16 @@ function Creators() {
     try {
       const token = localStorage.getItem("token");
       const formData = new FormData();
-      formData.append('showTitle', newCreator.showTitle);
-      formData.append('creatorName', newCreator.creatorName);
-      formData.append('creatorType', newCreator.creatorType);
-      formData.append('genre_id', newCreator.genre_id); // Ensure genre_id is included
-      formData.append('ageRestriction', newCreator.ageRestriction);
-      formData.append('starRating', newCreator.starRating);
-      formData.append('description', newCreator.description);
-      formData.append('listens', newCreator.listens);
+      formData.append("showTitle", newCreator.showTitle);
+      formData.append("creatorName", newCreator.creatorName);
+      formData.append("creatorType", newCreator.creatorType);
+      formData.append("genre_id", newCreator.genre_id); // Ensure genre_id is included
+      formData.append("ageRestriction", newCreator.ageRestriction);
+      formData.append("starRating", newCreator.starRating);
+      formData.append("description", newCreator.description);
+      formData.append("listens", newCreator.listens);
       if (newCreator.image) {
-        formData.append('image', newCreator.image);
+        formData.append("image", newCreator.image);
       }
 
       const response = await fetch(
@@ -170,7 +173,7 @@ function Creators() {
         }
       );
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error("Network response was not ok");
       }
       const result = await response.json();
 
@@ -214,7 +217,7 @@ function Creators() {
           }
         );
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error("Network response was not ok");
         }
         const result = await response.json();
 
@@ -233,7 +236,7 @@ function Creators() {
   };
 
   const handleInputChange = (e) => {
-    if (e.target.name === 'image') {
+    if (e.target.name === "image") {
       setNewCreator({ ...newCreator, [e.target.name]: e.target.files[0] });
     } else {
       setNewCreator({ ...newCreator, [e.target.name]: e.target.value });
@@ -269,7 +272,16 @@ function Creators() {
           <Grid container spacing={6}>
             <Grid item xs={12}>
               <Card>
-                <MDBox mx={2} mt={-3} py={3} px={2} variant="gradient" bgColor="info" borderRadius="lg" coloredShadow="info">
+                <MDBox
+                  mx={2}
+                  mt={-3}
+                  py={3}
+                  px={2}
+                  variant="gradient"
+                  bgColor="info"
+                  borderRadius="lg"
+                  coloredShadow="info"
+                >
                   <MDTypography variant="h6" color="white">
                     Loading Creators Data...
                   </MDTypography>
@@ -300,7 +312,7 @@ function Creators() {
         <img
           src={row.original.image}
           alt={row.original.showTitle}
-          style={{ width: '50px', height: '50px', borderRadius: '50%' }}
+          style={{ width: "50px", height: "50px", borderRadius: "50%" }}
         />
       ),
     },
@@ -337,14 +349,29 @@ function Creators() {
         <Grid container spacing={6}>
           <Grid item xs={12}>
             <Card>
-              <MDBox mx={2} mt={-3} py={3} px={2} variant="gradient" bgColor="info" borderRadius="lg" coloredShadow="info">
+              <MDBox
+                mx={2}
+                mt={-3}
+                py={3}
+                px={2}
+                variant="gradient"
+                bgColor="info"
+                borderRadius="lg"
+                coloredShadow="info"
+              >
                 <MDTypography variant="h6" color="white">
                   Creators
                 </MDTypography>
               </MDBox>
               <MDBox pt={3} sx={{ display: "flex", flexDirection: "column", height: "400px" }}>
                 <MDBox sx={{ flex: 1, overflow: "auto" }}>
-                  <DataTable table={{ columns, rows: creators }} isSorted={false} entriesPerPage={false} showTotalEntries={false} noEndBorder />
+                  <DataTable
+                    table={{ columns, rows: creators }}
+                    isSorted={false}
+                    entriesPerPage={false}
+                    showTotalEntries={false}
+                    noEndBorder
+                  />
                 </MDBox>
                 <Button
                   variant="contained"
@@ -402,14 +429,11 @@ function Creators() {
             options={genres}
             getOptionLabel={(option) => option.genre_name}
             value={genres.find((genre) => genre.id === newCreator.genre_id) || null}
-            onChange={(event, value) => setNewCreator({ ...newCreator, genre_id: value ? value.id : null })}
+            onChange={(event, value) =>
+              setNewCreator({ ...newCreator, genre_id: value ? value.id : null })
+            }
             renderInput={(params) => (
-              <TextField
-                {...params}
-                label="Genre"
-                fullWidth
-                margin="normal"
-              />
+              <TextField {...params} label="Genre" fullWidth margin="normal" />
             )}
           />
           <TextField
@@ -445,17 +469,16 @@ function Creators() {
             onChange={handleInputChange}
             margin="normal"
           />
-          <input
-            type="file"
-            name="image"
-            onChange={handleInputChange}
-          />
+          <input type="file" name="image" onChange={handleInputChange} />
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setOpenModal(false)} color="primary">
             Cancel
           </Button>
-          <Button onClick={newCreator.id ? handleUpdateCreator : handleCreateCreator} color="primary">
+          <Button
+            onClick={newCreator.id ? handleUpdateCreator : handleCreateCreator}
+            color="primary"
+          >
             {newCreator.id ? "Update" : "Create"}
           </Button>
         </DialogActions>

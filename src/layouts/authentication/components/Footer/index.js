@@ -64,7 +64,6 @@ function Footer({ light }) {
             </Link>
             for a better web.
           </MDBox>
-         
         </MDBox>
       </Container>
     </MDBox>

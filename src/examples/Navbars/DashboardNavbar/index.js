@@ -108,7 +108,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
       let colorValue = light || darkMode ? white.main : dark.main;
 
       if (transparentNavbar && !light) {
-        colorValue = darkMode ? rgba(text.main, 0.) : text.main;
+        colorValue = darkMode ? rgba(text.main, 0) : text.main;
       }
 
       return colorValue;
@@ -177,7 +177,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
                 onClick={handleLogout}
               >
                 <Icon sx={iconsStyle}>logout</Icon>
-              <h5>Logout</h5>
+                <h5>Logout</h5>
               </IconButton>
             </MDBox>
           </MDBox>

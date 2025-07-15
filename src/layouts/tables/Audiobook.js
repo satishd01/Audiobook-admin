@@ -54,7 +54,7 @@ function Audiobooks() {
         },
       });
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error("Network response was not ok");
       }
       const data = await response.json();
       if (data && data.data) {
@@ -77,7 +77,7 @@ function Audiobooks() {
         },
       });
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error("Network response was not ok");
       }
       const data = await response.json();
       if (data && data.message === "Genres fetched successfully") {
@@ -98,7 +98,7 @@ function Audiobooks() {
         },
       });
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error("Network response was not ok");
       }
       const data = await response.json();
       if (data && Array.isArray(data)) {
@@ -120,15 +120,15 @@ function Audiobooks() {
     try {
       const token = localStorage.getItem("token");
       const formData = new FormData();
-      formData.append('name', newAudiobook.name);
-      formData.append('show_title', newAudiobook.show_title);
-      formData.append('description', newAudiobook.description);
-      formData.append('creator_id', newAudiobook.creator_id);
-      formData.append('genre_id', newAudiobook.genre_id);
-      formData.append('creator_name', newAudiobook.creator_name);
-      formData.append('genre_name', newAudiobook.genre_name);
+      formData.append("name", newAudiobook.name);
+      formData.append("show_title", newAudiobook.show_title);
+      formData.append("description", newAudiobook.description);
+      formData.append("creator_id", newAudiobook.creator_id);
+      formData.append("genre_id", newAudiobook.genre_id);
+      formData.append("creator_name", newAudiobook.creator_name);
+      formData.append("genre_name", newAudiobook.genre_name);
       if (newAudiobook.image) {
-        formData.append('image', newAudiobook.image);
+        formData.append("image", newAudiobook.image);
       }
 
       const response = await fetch("https://lumeromind.shellcode.website/api/audiobook", {
@@ -139,13 +139,13 @@ function Audiobooks() {
         body: formData,
       });
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error("Network response was not ok");
       }
       const result = await response.json();
 
       if (result.message) {
         // Optimistic update: immediately add the new audiobook to the state
-        fetchAudiobooks()
+        fetchAudiobooks();
         setOpenModal(false); // Close the modal
         setAudiobooks((prevAudiobooks) => [
           {
@@ -161,7 +161,6 @@ function Audiobooks() {
           },
           ...prevAudiobooks,
         ]);
-
 
         setNewAudiobook({
           name: "",
@@ -187,15 +186,15 @@ function Audiobooks() {
     try {
       const token = localStorage.getItem("token");
       const formData = new FormData();
-      formData.append('name', newAudiobook.name);
-      formData.append('show_title', newAudiobook.show_title);
-      formData.append('description', newAudiobook.description);
-      formData.append('creator_id', newAudiobook.creator_id);
-      formData.append('genre_id', newAudiobook.genre_id);
-      formData.append('creator_name', newAudiobook.creator_name);
-      formData.append('genre_name', newAudiobook.genre_name);
+      formData.append("name", newAudiobook.name);
+      formData.append("show_title", newAudiobook.show_title);
+      formData.append("description", newAudiobook.description);
+      formData.append("creator_id", newAudiobook.creator_id);
+      formData.append("genre_id", newAudiobook.genre_id);
+      formData.append("creator_name", newAudiobook.creator_name);
+      formData.append("genre_name", newAudiobook.genre_name);
       if (newAudiobook.image) {
-        formData.append('image', newAudiobook.image);
+        formData.append("image", newAudiobook.image);
       }
 
       const response = await fetch(
@@ -209,12 +208,12 @@ function Audiobooks() {
         }
       );
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error("Network response was not ok");
       }
       const result = await response.json();
 
       if (result.message) {
-        fetchAudiobooks()
+        fetchAudiobooks();
         setOpenModal(false); // Close the modal
         // Optimistic update: immediately update the audiobook in the state
         setAudiobooks((prevAudiobooks) =>
@@ -223,7 +222,6 @@ function Audiobooks() {
           )
         );
 
-        
         setNewAudiobook({
           name: "",
           show_title: "",
@@ -259,12 +257,12 @@ function Audiobooks() {
           }
         );
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error("Network response was not ok");
         }
         const result = await response.json();
 
         if (result.message) {
-          fetchAudiobooks()
+          fetchAudiobooks();
           setAudiobooks((prevAudiobooks) =>
             prevAudiobooks.filter((audiobook) => audiobook.id !== audiobookId)
           );
@@ -280,7 +278,7 @@ function Audiobooks() {
   };
 
   const handleInputChange = (e) => {
-    if (e.target.name === 'image') {
+    if (e.target.name === "image") {
       setNewAudiobook({ ...newAudiobook, [e.target.name]: e.target.files[0] });
     } else {
       setNewAudiobook({ ...newAudiobook, [e.target.name]: e.target.value });
@@ -315,7 +313,16 @@ function Audiobooks() {
           <Grid container spacing={6}>
             <Grid item xs={12}>
               <Card>
-                <MDBox mx={2} mt={-3} py={3} px={2} variant="gradient" bgColor="info" borderRadius="lg" coloredShadow="info">
+                <MDBox
+                  mx={2}
+                  mt={-3}
+                  py={3}
+                  px={2}
+                  variant="gradient"
+                  bgColor="info"
+                  borderRadius="lg"
+                  coloredShadow="info"
+                >
                   <MDTypography variant="h6" color="white">
                     Loading Audiobooks Data...
                   </MDTypography>
@@ -345,7 +352,7 @@ function Audiobooks() {
         <img
           src={row.original.image}
           alt={row.original.name}
-          style={{ width: '50px', height: '50px', borderRadius: '50%' }}
+          style={{ width: "50px", height: "50px", borderRadius: "50%" }}
         />
       ),
     },
@@ -382,14 +389,29 @@ function Audiobooks() {
         <Grid container spacing={6}>
           <Grid item xs={12}>
             <Card>
-              <MDBox mx={2} mt={-3} py={3} px={2} variant="gradient" bgColor="info" borderRadius="lg" coloredShadow="info">
+              <MDBox
+                mx={2}
+                mt={-3}
+                py={3}
+                px={2}
+                variant="gradient"
+                bgColor="info"
+                borderRadius="lg"
+                coloredShadow="info"
+              >
                 <MDTypography variant="h6" color="white">
                   Audiobooks
                 </MDTypography>
               </MDBox>
               <MDBox pt={3} sx={{ display: "flex", flexDirection: "column", height: "400px" }}>
                 <MDBox sx={{ flex: 1, overflow: "auto" }}>
-                  <DataTable table={{ columns, rows: audiobooks }} isSorted={false} entriesPerPage={false} showTotalEntries={false} noEndBorder />
+                  <DataTable
+                    table={{ columns, rows: audiobooks }}
+                    isSorted={false}
+                    entriesPerPage={false}
+                    showTotalEntries={false}
+                    noEndBorder
+                  />
                 </MDBox>
                 <Button
                   variant="contained"
@@ -447,43 +469,42 @@ function Audiobooks() {
             options={creators}
             getOptionLabel={(option) => option.creatorName}
             value={creators.find((creator) => creator.id === newAudiobook.creator_id) || null}
-            onChange={(event, value) => setNewAudiobook({ ...newAudiobook, creator_id: value?.id, creator_name: value?.creatorName })}
+            onChange={(event, value) =>
+              setNewAudiobook({
+                ...newAudiobook,
+                creator_id: value?.id,
+                creator_name: value?.creatorName,
+              })
+            }
             renderInput={(params) => (
-              <TextField
-                {...params}
-                label="Creator"
-                fullWidth
-                name="creator_id"
-                margin="normal"
-              />
+              <TextField {...params} label="Creator" fullWidth name="creator_id" margin="normal" />
             )}
           />
           <Autocomplete
             options={genres}
             getOptionLabel={(option) => option.genre_name}
             value={genres.find((genre) => genre.id === newAudiobook.genre_id) || null}
-            onChange={(event, value) => setNewAudiobook({ ...newAudiobook, genre_id: value?.id, genre_name: value?.genre_name })}
+            onChange={(event, value) =>
+              setNewAudiobook({
+                ...newAudiobook,
+                genre_id: value?.id,
+                genre_name: value?.genre_name,
+              })
+            }
             renderInput={(params) => (
-              <TextField
-                {...params}
-                label="Genre"
-                fullWidth
-                name="genre_id"
-                margin="normal"
-              />
+              <TextField {...params} label="Genre" fullWidth name="genre_id" margin="normal" />
             )}
           />
-          <input
-            type="file"
-            name="image"
-            onChange={handleInputChange}
-          />
+          <input type="file" name="image" onChange={handleInputChange} />
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setOpenModal(false)} color="primary">
             Cancel
           </Button>
-          <Button onClick={newAudiobook.id ? handleUpdateAudiobook : handleCreateAudiobook} color="primary">
+          <Button
+            onClick={newAudiobook.id ? handleUpdateAudiobook : handleCreateAudiobook}
+            color="primary"
+          >
             {newAudiobook.id ? "Update" : "Create"}
           </Button>
         </DialogActions>

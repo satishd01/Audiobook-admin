@@ -31,7 +31,9 @@ function NEWDashboard() {
         }
       } catch (error) {
         console.error("Error fetching dashboard data:", error);
-        alert("Failed to fetch dashboard data. Please check your network connection and try again.");
+        alert(
+          "Failed to fetch dashboard data. Please check your network connection and try again."
+        );
       }
     };
 
@@ -45,7 +47,16 @@ function NEWDashboard() {
         <MDBox py={3}>
           <Grid container spacing={3}>
             <Grid item xs={12}>
-              <MDBox mx={2} mt={-3} py={3} px={2} variant="gradient" bgColor="info" borderRadius="lg" coloredShadow="info">
+              <MDBox
+                mx={2}
+                mt={-3}
+                py={3}
+                px={2}
+                variant="gradient"
+                bgColor="info"
+                borderRadius="lg"
+                coloredShadow="info"
+              >
                 <MDTypography variant="h6" color="white">
                   Loading Dashboard Data...
                 </MDTypography>

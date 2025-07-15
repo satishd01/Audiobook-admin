@@ -29,10 +29,13 @@ function Basic() {
     const payload = {
       email: email,
       password: password,
-    };ww
+    };
 
     try {
-      const response = await axios.post("https://lumeromind.shellcode.website/api/admin/auth/login", payload);
+      const response = await axios.post(
+        "https://lumeromind.shellcode.website/api/admin/auth/login",
+        payload
+      );
 
       if (response.data.success) {
         // Save the token to local storage
@@ -52,7 +55,9 @@ function Basic() {
 
   return (
     <BasicLayout image={bgImage}>
-      <Card sx={{ backgroundColor: '#FFFFFF' }}> {/* Changed background color to white */}
+      <Card sx={{ backgroundColor: "#FFFFFF" }}>
+        {" "}
+        {/* Changed background color to white */}
         <MDBox
           variant="gradient"
           bgColor="#f5f5f5"
@@ -63,7 +68,6 @@ function Basic() {
           p={2}
           mb={1}
           textAlign="center"
-          
         >
           {/* Add the logo at the top */}
           <MDBox mb={5}>

@@ -48,7 +48,7 @@ function UserInfo() {
           },
         });
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error("Network response was not ok");
         }
         const data = await response.json();
         if (data) {
@@ -71,21 +71,24 @@ function UserInfo() {
   const handleUpdateUserInfo = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(`https://lumeromind.shellcode.website/api/userinfo/${newUserInfo.id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          name: newUserInfo.name,
-          email: newUserInfo.email,
-          mobileNumber: newUserInfo.mobile_number,
-          genre: newUserInfo.genre,
-        }),
-      });
+      const response = await fetch(
+        `https://lumeromind.shellcode.website/api/userinfo/${newUserInfo.id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            name: newUserInfo.name,
+            email: newUserInfo.email,
+            mobileNumber: newUserInfo.mobile_number,
+            genre: newUserInfo.genre,
+          }),
+        }
+      );
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error("Network response was not ok");
       }
       const result = await response.json();
 
@@ -108,7 +111,9 @@ function UserInfo() {
       }
     } catch (error) {
       console.error("Error updating user information:", error);
-      alert("Failed to update user information. Please check your network connection and try again.");
+      alert(
+        "Failed to update user information. Please check your network connection and try again."
+      );
     }
   };
 
@@ -117,14 +122,17 @@ function UserInfo() {
     if (confirmDelete) {
       try {
         const token = localStorage.getItem("token");
-        const response = await fetch(`https://lumeromind.shellcode.website/api/userinfo/${userId}`, {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await fetch(
+          `https://lumeromind.shellcode.website/api/userinfo/${userId}`,
+          {
+            method: "DELETE",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error("Network response was not ok");
         }
         const result = await response.json();
 
@@ -136,7 +144,9 @@ function UserInfo() {
         }
       } catch (error) {
         console.error("Error deleting user information:", error);
-        alert("Failed to delete user information. Please check your network connection and try again.");
+        alert(
+          "Failed to delete user information. Please check your network connection and try again."
+        );
       }
     }
   };
@@ -174,7 +184,16 @@ function UserInfo() {
           <Grid container spacing={6}>
             <Grid item xs={12}>
               <Card>
-                <MDBox mx={2} mt={-3} py={3} px={2} variant="gradient" bgColor="info" borderRadius="lg" coloredShadow="info">
+                <MDBox
+                  mx={2}
+                  mt={-3}
+                  py={3}
+                  px={2}
+                  variant="gradient"
+                  bgColor="info"
+                  borderRadius="lg"
+                  coloredShadow="info"
+                >
                   <MDTypography variant="h6" color="white">
                     Loading User Information...
                   </MDTypography>
@@ -230,14 +249,29 @@ function UserInfo() {
         <Grid container spacing={6}>
           <Grid item xs={12}>
             <Card>
-              <MDBox mx={2} mt={-3} py={3} px={2} variant="gradient" bgColor="info" borderRadius="lg" coloredShadow="info">
+              <MDBox
+                mx={2}
+                mt={-3}
+                py={3}
+                px={2}
+                variant="gradient"
+                bgColor="info"
+                borderRadius="lg"
+                coloredShadow="info"
+              >
                 <MDTypography variant="h6" color="white">
                   Users
                 </MDTypography>
               </MDBox>
               <MDBox pt={3} sx={{ display: "flex", flexDirection: "column", height: "400px" }}>
                 <MDBox sx={{ flex: 1, overflow: "auto" }}>
-                  <DataTable table={{ columns, rows: userInfo }} isSorted={false} entriesPerPage={false} showTotalEntries={false} noEndBorder />
+                  <DataTable
+                    table={{ columns, rows: userInfo }}
+                    isSorted={false}
+                    entriesPerPage={false}
+                    showTotalEntries={false}
+                    noEndBorder
+                  />
                 </MDBox>
               </MDBox>
             </Card>

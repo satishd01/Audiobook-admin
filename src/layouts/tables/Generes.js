@@ -44,7 +44,7 @@ function Genres() {
         },
       });
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error("Network response was not ok");
       }
       const data = await response.json();
       if (data && data.message === "Genres fetched successfully") {
@@ -67,9 +67,9 @@ function Genres() {
     try {
       const token = localStorage.getItem("token");
       const formData = new FormData();
-      formData.append('genre_name', newGenre.genre_name);
+      formData.append("genre_name", newGenre.genre_name);
       if (newGenre.image) {
-        formData.append('image', newGenre.image);
+        formData.append("image", newGenre.image);
       }
 
       const response = await fetch("https://lumeromind.shellcode.website/api/admin/genre", {
@@ -80,13 +80,13 @@ function Genres() {
         body: formData,
       });
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error("Network response was not ok");
       }
       const result = await response.json();
 
       if (result.message === "Genre created successfully") {
         // Re-fetch genres after successful creation
-        fetchGenres();  // This will ensure the UI reflects the new genre immediately
+        fetchGenres(); // This will ensure the UI reflects the new genre immediately
         setOpenModal(false);
         setNewGenre({
           genre_name: "",
@@ -110,9 +110,9 @@ function Genres() {
     try {
       const token = localStorage.getItem("token");
       const formData = new FormData();
-      formData.append('genre_name', newGenre.genre_name);
+      formData.append("genre_name", newGenre.genre_name);
       if (newGenre.image) {
-        formData.append('image', newGenre.image);
+        formData.append("image", newGenre.image);
       }
 
       const response = await fetch(
@@ -126,15 +126,13 @@ function Genres() {
         }
       );
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error("Network response was not ok");
       }
       const result = await response.json();
 
       if (result.message === "Genre updated successfully") {
         setGenres((prevGenres) =>
-          prevGenres.map((genre) =>
-            genre.id === newGenre.id ? { ...genre, ...newGenre } : genre
-          )
+          prevGenres.map((genre) => (genre.id === newGenre.id ? { ...genre, ...newGenre } : genre))
         );
         setOpenModal(false);
         setNewGenre({
@@ -169,14 +167,12 @@ function Genres() {
           }
         );
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error("Network response was not ok");
         }
         const result = await response.json();
 
         if (result.message === "Genre deleted successfully") {
-          setGenres((prevGenres) =>
-            prevGenres.filter((genre) => genre.id !== genreId)
-          );
+          setGenres((prevGenres) => prevGenres.filter((genre) => genre.id !== genreId));
           setSuccessMessage("Genre deleted successfully!");
           setTimeout(() => setSuccessMessage(""), 3000); // Clear message after 3 seconds
         } else {
@@ -190,7 +186,7 @@ function Genres() {
   };
 
   const handleInputChange = (e) => {
-    if (e.target.name === 'image') {
+    if (e.target.name === "image") {
       setNewGenre({ ...newGenre, [e.target.name]: e.target.files[0] });
     } else {
       setNewGenre({ ...newGenre, [e.target.name]: e.target.value });
@@ -219,7 +215,16 @@ function Genres() {
           <Grid container spacing={6}>
             <Grid item xs={12}>
               <Card>
-                <MDBox mx={2} mt={-3} py={3} px={2} variant="gradient" bgColor="info" borderRadius="lg" coloredShadow="info">
+                <MDBox
+                  mx={2}
+                  mt={-3}
+                  py={3}
+                  px={2}
+                  variant="gradient"
+                  bgColor="info"
+                  borderRadius="lg"
+                  coloredShadow="info"
+                >
                   <MDTypography variant="h6" color="white">
                     Loading Genres Data...
                   </MDTypography>
@@ -243,7 +248,7 @@ function Genres() {
         <img
           src={row.original.image}
           alt={row.original.genre_name}
-          style={{ width: '50px', height: '50px', borderRadius: '50%' }}
+          style={{ width: "50px", height: "50px", borderRadius: "50%" }}
         />
       ),
     },
@@ -280,14 +285,29 @@ function Genres() {
         <Grid container spacing={6}>
           <Grid item xs={12}>
             <Card>
-              <MDBox mx={2} mt={-3} py={3} px={2} variant="gradient" bgColor="info" borderRadius="lg" coloredShadow="info">
+              <MDBox
+                mx={2}
+                mt={-3}
+                py={3}
+                px={2}
+                variant="gradient"
+                bgColor="info"
+                borderRadius="lg"
+                coloredShadow="info"
+              >
                 <MDTypography variant="h6" color="white">
-                  Genres 
+                  Genres
                 </MDTypography>
               </MDBox>
               <MDBox pt={3} sx={{ display: "flex", flexDirection: "column", height: "400px" }}>
                 <MDBox sx={{ flex: 1, overflow: "auto" }}>
-                  <DataTable table={{ columns, rows: genres }} isSorted={false} entriesPerPage={false} showTotalEntries={false} noEndBorder />
+                  <DataTable
+                    table={{ columns, rows: genres }}
+                    isSorted={false}
+                    entriesPerPage={false}
+                    showTotalEntries={false}
+                    noEndBorder
+                  />
                 </MDBox>
                 <Button
                   variant="contained"
@@ -325,17 +345,17 @@ function Genres() {
             onChange={handleInputChange}
             margin="normal"
           />
-          <input
-            type="file"
-            name="image"
-            onChange={handleInputChange}
-          />
+          <input type="file" name="image" onChange={handleInputChange} />
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setOpenModal(false)} color="primary">
             Cancel
           </Button>
-          <Button onClick={newGenre.id ? handleUpdateGenre : handleCreateGenre} color="primary" disabled={isCreating || isUpdating}>
+          <Button
+            onClick={newGenre.id ? handleUpdateGenre : handleCreateGenre}
+            color="primary"
+            disabled={isCreating || isUpdating}
+          >
             {newGenre.id ? "Update" : "Create"}
           </Button>
         </DialogActions>

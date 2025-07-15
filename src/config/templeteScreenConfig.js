@@ -17,13 +17,13 @@ export const TEMPLET_SCREEN_CONFIG = {
         Header: "Options",
         accessor: "options",
         type: "json",
-        Cell: ({ value }) => renderJsonCell(value, 'array'),
+        Cell: ({ value }) => renderJsonCell(value, "array"),
       },
       {
         Header: "Answers",
         accessor: "answers",
         type: "json",
-        Cell: ({ value }) => renderJsonCell(value, 'array'),
+        Cell: ({ value }) => renderJsonCell(value, "array"),
       },
       {
         Header: "University",
@@ -42,7 +42,7 @@ export const TEMPLET_SCREEN_CONFIG = {
       },
     ],
     importSampleFile:
-      "https://docs.google.com/spreadsheets/d/1BXPXNDXQBD57MWlNjKDrTXHpMF2tbbfCKRJogwT4VF8/edit?usp=drive_link", 
+      "https://docs.google.com/spreadsheets/d/1BXPXNDXQBD57MWlNjKDrTXHpMF2tbbfCKRJogwT4VF8/edit?usp=drive_link",
     icon: "rule",
   },
 
@@ -102,7 +102,7 @@ export const TEMPLET_SCREEN_CONFIG = {
       },
     ],
     importSampleFile:
-      "https://docs.google.com/spreadsheets/d/1TtaDpuFBCmeadlBcp2BHeQRw8bP2LCTIsEj5ZJeV-mE/edit?gid=0#gid=0", 
+      "https://docs.google.com/spreadsheets/d/1TtaDpuFBCmeadlBcp2BHeQRw8bP2LCTIsEj5ZJeV-mE/edit?gid=0#gid=0",
     icon: "rule",
   },
 
@@ -124,13 +124,13 @@ export const TEMPLET_SCREEN_CONFIG = {
         Header: "Options",
         accessor: "options",
         type: "json",
-        Cell: ({ value }) => renderJsonCell(value, 'array'),
+        Cell: ({ value }) => renderJsonCell(value, "array"),
       },
       {
         Header: "Answers",
         accessor: "answers",
         type: "json",
-        Cell: ({ value }) => showimage(value, 'array'),
+        Cell: ({ value }) => showimage(value, "array"),
       },
       {
         Header: "University",
@@ -149,7 +149,7 @@ export const TEMPLET_SCREEN_CONFIG = {
       },
     ],
     importSampleFile:
-      "https://docs.google.com/spreadsheets/d/1cKvnLa6MG1wRdr0zIDf9Tu5Ze_5ngeEV4fWXH-UDfbc/edit?gid=0#gid=0", 
+      "https://docs.google.com/spreadsheets/d/1cKvnLa6MG1wRdr0zIDf9Tu5Ze_5ngeEV4fWXH-UDfbc/edit?gid=0#gid=0",
     icon: "rule",
     pagination: {
       totalRecords: 24,
@@ -172,13 +172,13 @@ export const TEMPLET_SCREEN_CONFIG = {
         Header: "Options",
         accessor: "options",
         type: "json",
-        Cell: ({ value }) => renderJsonCell(value, 'array'),
+        Cell: ({ value }) => renderJsonCell(value, "array"),
       },
       {
         Header: "Answer",
         accessor: "answer",
         type: "json",
-        Cell: ({ value }) => renderJsonCell(value, 'array'),
+        Cell: ({ value }) => renderJsonCell(value, "array"),
       },
       {
         Header: "University",
@@ -197,7 +197,7 @@ export const TEMPLET_SCREEN_CONFIG = {
       },
     ],
     importSampleFile:
-      "https://docs.google.com/spreadsheets/d/1PQkCMjD7TAW3W4tfsqk0lHWZ4gtJhvK0PNBi0jQ4Bew/edit?gid=0#gid=0", 
+      "https://docs.google.com/spreadsheets/d/1PQkCMjD7TAW3W4tfsqk0lHWZ4gtJhvK0PNBi0jQ4Bew/edit?gid=0#gid=0",
     icon: "rule",
     pagination: {
       totalRecords: 28,
@@ -215,13 +215,13 @@ export const TEMPLET_SCREEN_CONFIG = {
         Header: "Question",
         accessor: "question",
         type: "json",
-        Cell: ({ value }) => renderJsonCell(value, 'array'),
+        Cell: ({ value }) => renderJsonCell(value, "array"),
       },
       {
         Header: "Answer",
         accessor: "answer",
         type: "json",
-        Cell: ({ value }) => renderJsonCell(value, 'array'),
+        Cell: ({ value }) => renderJsonCell(value, "array"),
       },
       {
         Header: "English Title",
@@ -250,7 +250,7 @@ export const TEMPLET_SCREEN_CONFIG = {
       },
     ],
     importSampleFile:
-      "https://docs.google.com/spreadsheets/d/1ArrSBpBV4p-fpHT10AZu8sS6mpqOpcOlvaDuTmg_F-I/edit?gid=0#gid=0", 
+      "https://docs.google.com/spreadsheets/d/1ArrSBpBV4p-fpHT10AZu8sS6mpqOpcOlvaDuTmg_F-I/edit?gid=0#gid=0",
     icon: "rule",
     pagination: {
       totalRecords: 60,
@@ -268,13 +268,13 @@ export const TEMPLET_SCREEN_CONFIG = {
         Header: "Question",
         accessor: "question",
         type: "json",
-        Cell: ({ value }) => renderJsonCell(value, 'array'),
+        Cell: ({ value }) => renderJsonCell(value, "array"),
       },
       {
         Header: "Answer",
         accessor: "answer",
         type: "json",
-        Cell: ({ value }) => renderJsonCell(value, 'array'),
+        Cell: ({ value }) => renderJsonCell(value, "array"),
       },
       {
         Header: "English Title",
@@ -303,7 +303,7 @@ export const TEMPLET_SCREEN_CONFIG = {
       },
     ],
     importSampleFile:
-      "https://docs.google.com/spreadsheets/d/1aTcDhkxNi1juwfBR8QIkXwy49MjhDa3RIFlo1Xnp-qQ/edit?gid=0#gid=0", 
+      "https://docs.google.com/spreadsheets/d/1aTcDhkxNi1juwfBR8QIkXwy49MjhDa3RIFlo1Xnp-qQ/edit?gid=0#gid=0",
     icon: "rule",
     pagination: {
       totalRecords: 30,
@@ -351,7 +351,9 @@ export const TEMPLET_SCREEN_CONFIG = {
         Header: "Image",
         accessor: "image",
         type: "string",
-        Cell: ({ value }) => <img src={value} alt="Number image" style={{ width: 50, height: 50 }} />,
+        Cell: ({ value }) => (
+          <img src={value} alt="Number image" style={{ width: 50, height: 50 }} />
+        ),
       },
       {
         Header: "University",
@@ -370,7 +372,7 @@ export const TEMPLET_SCREEN_CONFIG = {
       },
     ],
     importSampleFile:
-      "https://docs.google.com/spreadsheets/d/1vnXk01GK5DMDMn4jVYB7I_yL-eVkkwN1f5z7mBUkh1w/edit?gid=0#gid=0", 
+      "https://docs.google.com/spreadsheets/d/1vnXk01GK5DMDMn4jVYB7I_yL-eVkkwN1f5z7mBUkh1w/edit?gid=0#gid=0",
     icon: "rule",
     pagination: {
       totalRecords: 30,
@@ -424,13 +426,13 @@ export const TEMPLET_SCREEN_CONFIG = {
       },
     ],
     importSampleFile:
-      "https://docs.google.com/spreadsheets/d/1jkkU9Cl7s7-iuHIlLBR2C4xe8o5gnXqkYJ-r4REORGA/edit?gid=0#gid=0", 
+      "https://docs.google.com/spreadsheets/d/1jkkU9Cl7s7-iuHIlLBR2C4xe8o5gnXqkYJ-r4REORGA/edit?gid=0#gid=0",
     icon: "rule",
     pagination: {
       totalRecords: 28,
       currentPage: 5,
       totalPages: 6,
-    }
+    },
   },
 
   learningW2WTemplate: {
@@ -476,7 +478,7 @@ export const TEMPLET_SCREEN_CONFIG = {
       },
     ],
     importSampleFile:
-      "https://docs.google.com/spreadsheets/d/1m7phWjHexIXj64lILs9yXUS6CilrqAKD23TVBrUM5dc/edit?gid=0#gid=0", 
+      "https://docs.google.com/spreadsheets/d/1m7phWjHexIXj64lILs9yXUS6CilrqAKD23TVBrUM5dc/edit?gid=0#gid=0",
     icon: "rule",
     pagination: {
       totalRecords: 21,
@@ -505,13 +507,13 @@ export const TEMPLET_SCREEN_CONFIG = {
         Header: "Options",
         accessor: "options",
         type: "json",
-        Cell: ({ value }) => showimage(value, 'array'),
+        Cell: ({ value }) => showimage(value, "array"),
       },
       {
         Header: "Answers",
         accessor: "answers",
         type: "json",
-        Cell: ({ value }) => renderJsonCell(value, 'array'),
+        Cell: ({ value }) => renderJsonCell(value, "array"),
       },
       {
         Header: "University",
@@ -529,7 +531,8 @@ export const TEMPLET_SCREEN_CONFIG = {
         type: "string",
       },
     ],
-    importSampleFile: "https://docs.google.com/spreadsheets/d/1eIt6l3kYvGZdLhTfjxVjSXN6098MWJgWTA7cijVNVeA/edit?gid=0#gid=0", 
+    importSampleFile:
+      "https://docs.google.com/spreadsheets/d/1eIt6l3kYvGZdLhTfjxVjSXN6098MWJgWTA7cijVNVeA/edit?gid=0#gid=0",
     icon: "volume-up",
   },
 
@@ -600,7 +603,7 @@ export const TEMPLET_SCREEN_CONFIG = {
   //       type: "string",
   //     },
   //   ],
-  //   importSampleFile: "https://docs.google.com/spreadsheets/d/1Vkii3SCwgU_E9xfm2FXrgiziq8e7ihzIvqdeba_83Mw/edit?gid=0#gid=0", 
+  //   importSampleFile: "https://docs.google.com/spreadsheets/d/1Vkii3SCwgU_E9xfm2FXrgiziq8e7ihzIvqdeba_83Mw/edit?gid=0#gid=0",
   //   icon: "slide",
   // },
 
@@ -638,7 +641,7 @@ export const TEMPLET_SCREEN_CONFIG = {
         Header: "Options",
         accessor: "options",
         type: "json",
-        Cell: ({ value }) => renderJsonCell(value, 'array'),
+        Cell: ({ value }) => renderJsonCell(value, "array"),
       },
       {
         Header: "Correct answer",
@@ -661,7 +664,8 @@ export const TEMPLET_SCREEN_CONFIG = {
         type: "string",
       },
     ],
-    importSampleFile: "https://docs.google.com/spreadsheets/d/18HBeZ9xLeQBgI6v_OELkeyP-qQdthqLsSJeYm5XVz-k/edit?gid=0#gid=0", 
+    importSampleFile:
+      "https://docs.google.com/spreadsheets/d/18HBeZ9xLeQBgI6v_OELkeyP-qQdthqLsSJeYm5XVz-k/edit?gid=0#gid=0",
     icon: "image",
   },
 
@@ -669,7 +673,6 @@ export const TEMPLET_SCREEN_CONFIG = {
     key: "fillTheVowelTemplate",
     header: "Fill the Vowel",
     columns: [
- 
       {
         Header: "Points",
         accessor: "points",
@@ -699,13 +702,13 @@ export const TEMPLET_SCREEN_CONFIG = {
         Header: "Questions",
         accessor: "questions",
         type: "array",
-        Cell: ({ value }) => renderJsonCell(value, 'array'),
+        Cell: ({ value }) => renderJsonCell(value, "array"),
       },
       {
         Header: "Options",
         accessor: "options",
         type: "array",
-        Cell: ({ value }) => renderJsonCell(value, 'array'),
+        Cell: ({ value }) => renderJsonCell(value, "array"),
       },
       {
         Header: "University",
@@ -723,7 +726,8 @@ export const TEMPLET_SCREEN_CONFIG = {
         type: "string",
       },
     ],
-    importSampleFile: "https://docs.google.com/spreadsheets/d/1eJldr5TVAGjKFXImorJMC-stf1pNwD1TONzVHN-EoCs/edit?gid=0#gid=0", 
+    importSampleFile:
+      "https://docs.google.com/spreadsheets/d/1eJldr5TVAGjKFXImorJMC-stf1pNwD1TONzVHN-EoCs/edit?gid=0#gid=0",
     icon: "vowel",
   },
 
@@ -753,11 +757,19 @@ export const TEMPLET_SCREEN_CONFIG = {
             <div>
               {value.map((scene, index) => (
                 <div key={index}>
-                  <p><strong>Scene {index + 1}:</strong> {scene.text}</p>
+                  <p>
+                    <strong>Scene {index + 1}:</strong> {scene.text}
+                  </p>
                   {scene.assets && scene.assets.path && (
-                    <img src={scene.assets.path} alt={`Scene ${index + 1}`} style={{ width: 50, height: 50 }} />
+                    <img
+                      src={scene.assets.path}
+                      alt={`Scene ${index + 1}`}
+                      style={{ width: 50, height: 50 }}
+                    />
                   )}
-                  <p><strong>Highlighted Words:</strong> {scene.highlightedWords.join(", ")}</p>
+                  <p>
+                    <strong>Highlighted Words:</strong> {scene.highlightedWords.join(", ")}
+                  </p>
                 </div>
               ))}
             </div>
@@ -786,7 +798,12 @@ export const TEMPLET_SCREEN_CONFIG = {
           return (
             <div>
               {value.map((image, index) => (
-                <img key={index} src={image} alt={`Image ${index + 1}`} style={{ width: 50, height: 50 }} />
+                <img
+                  key={index}
+                  src={image}
+                  alt={`Image ${index + 1}`}
+                  style={{ width: 50, height: 50 }}
+                />
               ))}
             </div>
           );
@@ -808,11 +825,10 @@ export const TEMPLET_SCREEN_CONFIG = {
         type: "string",
       },
     ],
-    importSampleFile: "https://docs.google.com/spreadsheets/d/1hgQ4yhsRIUQP_bocY3g3ZsatXtAgLQmbxs_Ctp1dWJw/edit?gid=0#gid=0",
+    importSampleFile:
+      "https://docs.google.com/spreadsheets/d/1hgQ4yhsRIUQP_bocY3g3ZsatXtAgLQmbxs_Ctp1dWJw/edit?gid=0#gid=0",
     icon: "book",
   },
-
-  
 
   sayWordTemplates: {
     key: "sayWordTemplate",
@@ -855,12 +871,11 @@ export const TEMPLET_SCREEN_CONFIG = {
         type: "string",
       },
     ],
-    
-    importSampleFile: "https://docs.google.com/spreadsheets/d/1cYclzvhzGbFUoZLzxZonM9vwTo7wHQvvo_07NV7Ydr8/edit?gid=0#gid=0", // Assuming this URL is correct
+
+    importSampleFile:
+      "https://docs.google.com/spreadsheets/d/1cYclzvhzGbFUoZLzxZonM9vwTo7wHQvvo_07NV7Ydr8/edit?gid=0#gid=0", // Assuming this URL is correct
     icon: "microphone",
   },
-
-  
 
   // storyTemplates: {
   //   key: "storyTemplate",
@@ -943,11 +958,10 @@ export const TEMPLET_SCREEN_CONFIG = {
   //       type: "string",
   //     },
   //   ],
-  //   importSampleFile: "https://docs.google.com/spreadsheets/d/1hgQ4yhsRIUQP_bocY3g3ZsatXtAgLQmbxs_Ctp1dWJw/edit?gid=0#gid=0", 
+  //   importSampleFile: "https://docs.google.com/spreadsheets/d/1hgQ4yhsRIUQP_bocY3g3ZsatXtAgLQmbxs_Ctp1dWJw/edit?gid=0#gid=0",
   //   icon: "book",
   // },
 
- 
   imageMCQTemplates: {
     key: "imageMCQTemplate",
     header: "MCQs with Image",
@@ -992,7 +1006,7 @@ export const TEMPLET_SCREEN_CONFIG = {
         Header: "Options",
         accessor: "options",
         type: "json",
-        Cell: ({ value }) => renderJsonCell(value, 'array'),
+        Cell: ({ value }) => renderJsonCell(value, "array"),
       },
       {
         Header: "correct answer",
@@ -1015,8 +1029,9 @@ export const TEMPLET_SCREEN_CONFIG = {
         type: "string",
       },
     ],
-    
-    importSampleFile: "https://docs.google.com/spreadsheets/d/1UyyrGRA4dMjLREIONQiY7lFtwGiocY5vPEdCzoMxYRQ/edit?gid=0#gid=0", // Assuming this URL is correct
+
+    importSampleFile:
+      "https://docs.google.com/spreadsheets/d/1UyyrGRA4dMjLREIONQiY7lFtwGiocY5vPEdCzoMxYRQ/edit?gid=0#gid=0", // Assuming this URL is correct
     icon: "microphone",
   },
 
@@ -1055,7 +1070,12 @@ export const TEMPLET_SCREEN_CONFIG = {
           return (
             <div>
               {value.map((image, index) => (
-                <img key={index} src={image} alt={`Image ${index + 1}`} style={{ width: 50, height: 50 }} />
+                <img
+                  key={index}
+                  src={image}
+                  alt={`Image ${index + 1}`}
+                  style={{ width: 50, height: 50 }}
+                />
               ))}
             </div>
           );
@@ -1077,15 +1097,11 @@ export const TEMPLET_SCREEN_CONFIG = {
         type: "string",
       },
     ],
-    importSampleFile: "https://docs.google.com/spreadsheets/d/13lDoUSZOLzj6hZhlq38UeUrmyRFNEf-wESB_dp1dGIw/edit?gid=0#gid=0",
+    importSampleFile:
+      "https://docs.google.com/spreadsheets/d/13lDoUSZOLzj6hZhlq38UeUrmyRFNEf-wESB_dp1dGIw/edit?gid=0#gid=0",
     icon: "book",
   },
-
-
-
 };
-
-
 
 const renderJsonCell = (value, type = "default") => {
   if (!value) return "-";
@@ -1107,7 +1123,13 @@ const renderJsonCell = (value, type = "default") => {
 
       case "array":
         if (Array.isArray(data)) {
-          return <div style={{ whiteSpace: "pre-wrap" }}>{"["}{data.join(", ")}{"]"}</div>;
+          return (
+            <div style={{ whiteSpace: "pre-wrap" }}>
+              {"["}
+              {data.join(", ")}
+              {"]"}
+            </div>
+          );
         }
         return <div style={{ whiteSpace: "pre-wrap" }}>{JSON.stringify(data, null, 2)}</div>;
 
@@ -1120,30 +1142,28 @@ const renderJsonCell = (value, type = "default") => {
 };
 const showimage = (value, type = "default") => {
   if (!value) return "-";
-// debugger
+  // debugger
 
   try {
     const data = typeof value === "string" ? JSON.parse(value) : value;
 
     switch (type) {
       case "single":
-        return (
-      <img src={value} alt="Number image" style={{ width: 50, height: 50 }} />
-        );
+        return <img src={value} alt="Number image" style={{ width: 50, height: 50 }} />;
 
       case "array":
-
-      
-  return (    <div style={{ display: "flex", gap: "10px" }}>
-      {data.map((path, index) => (
-        <img
-          key={index}
-          src={`${ process.env.REACT_APP_API_URL}${path}`} // Concatenating backend URL with path
-          alt={`Image ${index + 1}`}
-          style={{ width: "50px", height: "50px", objectFit: "cover", borderRadius: "5px" }}
-        />
-      ))}
-    </div>)
+        return (
+          <div style={{ display: "flex", gap: "10px" }}>
+            {data.map((path, index) => (
+              <img
+                key={index}
+                src={`${process.env.REACT_APP_API_URL}${path}`} // Concatenating backend URL with path
+                alt={`Image ${index + 1}`}
+                style={{ width: "50px", height: "50px", objectFit: "cover", borderRadius: "5px" }}
+              />
+            ))}
+          </div>
+        );
 
       default:
         return <div style={{ whiteSpace: "pre-wrap" }}>{JSON.stringify(data, null, 2)}</div>;

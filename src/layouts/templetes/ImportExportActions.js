@@ -17,7 +17,7 @@ const ImportExportActions = ({ templateConfig, onImport, onExport }) => {
 
   const closeModal = async () => {
     setWarnings([]);
-    setOpenImportModal(false)
+    setOpenImportModal(false);
   };
 
   const handleImport = async () => {

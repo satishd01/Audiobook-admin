@@ -42,7 +42,7 @@ export function TempletesScreen() {
   const [subjects, setSubjects] = useState([]);
   const [grades, setGrades] = useState([]);
   const recordsPerPageOptions = [10];
-  const showFilter = false
+  const showFilter = false;
 
   // Function to fetch data from the server
   const fetchData = async () => {
@@ -176,70 +176,72 @@ export function TempletesScreen() {
 
               <MDBox pt={3} sx={{ display: "flex", flexDirection: "column", height: "100%" }}>
                 {/* Filters */}
-               {showFilter && <MDBox sx={{ display: "flex", gap: 3, justifyContent: "space-between" }}>
-                  {/* University Filter */}
-                  <FormControl sx={{ width: "30%" }}>
-                    <InputLabel>University</InputLabel>
-                    <Select
-                      name="university"
-                      value={filters.university}
-                      onChange={handleFilterChange}
-                      label="University"
-                      displayEmpty
-                    >
-                      <MenuItem value="">
-                        <em>All</em>
-                      </MenuItem>
-                      {universities.map((university) => (
-                        <MenuItem key={university.id} value={university.id}>
-                          {university.name}
+                {showFilter && (
+                  <MDBox sx={{ display: "flex", gap: 3, justifyContent: "space-between" }}>
+                    {/* University Filter */}
+                    <FormControl sx={{ width: "30%" }}>
+                      <InputLabel>University</InputLabel>
+                      <Select
+                        name="university"
+                        value={filters.university}
+                        onChange={handleFilterChange}
+                        label="University"
+                        displayEmpty
+                      >
+                        <MenuItem value="">
+                          <em>All</em>
                         </MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
+                        {universities.map((university) => (
+                          <MenuItem key={university.id} value={university.id}>
+                            {university.name}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
 
-                  {/* Subject Filter */}
-                  <FormControl sx={{ width: "30%" }}>
-                    <InputLabel>Subject</InputLabel>
-                    <Select
-                      name="subject"
-                      value={filters.subject}
-                      onChange={handleFilterChange}
-                      label="Subject"
-                      displayEmpty
-                    >
-                      <MenuItem value="">
-                        <em>All</em>
-                      </MenuItem>
-                      {subjects.map((subject) => (
-                        <MenuItem key={subject.id} value={subject.id}>
-                          {subject.name}
+                    {/* Subject Filter */}
+                    <FormControl sx={{ width: "30%" }}>
+                      <InputLabel>Subject</InputLabel>
+                      <Select
+                        name="subject"
+                        value={filters.subject}
+                        onChange={handleFilterChange}
+                        label="Subject"
+                        displayEmpty
+                      >
+                        <MenuItem value="">
+                          <em>All</em>
                         </MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
+                        {subjects.map((subject) => (
+                          <MenuItem key={subject.id} value={subject.id}>
+                            {subject.name}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
 
-                  {/* Grade Filter */}
-                  <FormControl sx={{ width: "30%" }}>
-                    <InputLabel>Grade</InputLabel>
-                    <Select
-                      name="grade"
-                      value={filters.grade}
-                      onChange={handleFilterChange}
-                      label="Grade"
-                      displayEmpty
-                    >
-                      <MenuItem value="">
-                        <em>All</em>
-                      </MenuItem>
-                      {grades.map((grade) => (
-                        <MenuItem key={grade.id} value={grade.id}>
-                          {grade.name}
+                    {/* Grade Filter */}
+                    <FormControl sx={{ width: "30%" }}>
+                      <InputLabel>Grade</InputLabel>
+                      <Select
+                        name="grade"
+                        value={filters.grade}
+                        onChange={handleFilterChange}
+                        label="Grade"
+                        displayEmpty
+                      >
+                        <MenuItem value="">
+                          <em>All</em>
                         </MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
-                </MDBox>}
+                        {grades.map((grade) => (
+                          <MenuItem key={grade.id} value={grade.id}>
+                            {grade.name}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+                  </MDBox>
+                )}
 
                 {/* Loading Indicator */}
                 {loading && (

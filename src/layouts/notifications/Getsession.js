@@ -117,7 +117,9 @@ function SessionManagement() {
 
   const fetchSubjects = async (universityId) => {
     try {
-      const response = await fetch(`https://api.blissiq.cloud/admin/subject?universityId=${universityId}`);
+      const response = await fetch(
+        `https://api.blissiq.cloud/admin/subject?universityId=${universityId}`
+      );
       const data = await response.json();
 
       if (data.success && Array.isArray(data.data)) {
@@ -132,7 +134,9 @@ function SessionManagement() {
 
   const fetchGrades = async (universityId) => {
     try {
-      const response = await fetch(`https://api.blissiq.cloud/admin/grade?universityId=${universityId}`);
+      const response = await fetch(
+        `https://api.blissiq.cloud/admin/grade?universityId=${universityId}`
+      );
       const data = await response.json();
       if (data.success) {
         setGrades(data.data.reverse());
@@ -179,7 +183,7 @@ function SessionManagement() {
 
       if (data && Array.isArray(data)) {
         if (type) {
-          setSessions(data.filter(session => session.type === type));
+          setSessions(data.filter((session) => session.type === type));
         } else {
           setSessions(data);
         }
@@ -452,7 +456,9 @@ function SessionManagement() {
                         <Select
                           name="universityId"
                           value={searchParams.universityId}
-                          onChange={(e) => setSearchParams({ ...searchParams, universityId: e.target.value })}
+                          onChange={(e) =>
+                            setSearchParams({ ...searchParams, universityId: e.target.value })
+                          }
                           label="University"
                           sx={{ padding: "12px 14px" }}
                         >
@@ -470,7 +476,9 @@ function SessionManagement() {
                         <Select
                           name="subjectId"
                           value={searchParams.subjectId}
-                          onChange={(e) => setSearchParams({ ...searchParams, subjectId: e.target.value })}
+                          onChange={(e) =>
+                            setSearchParams({ ...searchParams, subjectId: e.target.value })
+                          }
                           label="Subject"
                           sx={{ padding: "12px 14px" }}
                         >
@@ -488,7 +496,9 @@ function SessionManagement() {
                         <Select
                           name="gradeId"
                           value={searchParams.gradeId}
-                          onChange={(e) => setSearchParams({ ...searchParams, gradeId: e.target.value })}
+                          onChange={(e) =>
+                            setSearchParams({ ...searchParams, gradeId: e.target.value })
+                          }
                           label="Grade"
                           sx={{ padding: "12px 14px" }}
                         >
@@ -506,7 +516,9 @@ function SessionManagement() {
                         <Select
                           name="topicId"
                           value={searchParams.topicId}
-                          onChange={(e) => setSearchParams({ ...searchParams, topicId: e.target.value })}
+                          onChange={(e) =>
+                            setSearchParams({ ...searchParams, topicId: e.target.value })
+                          }
                           label="Topic"
                           sx={{ padding: "12px 14px" }}
                         >
@@ -524,7 +536,9 @@ function SessionManagement() {
                         <Select
                           name="type"
                           value={searchParams.type}
-                          onChange={(e) => setSearchParams({ ...searchParams, type: e.target.value })}
+                          onChange={(e) =>
+                            setSearchParams({ ...searchParams, type: e.target.value })
+                          }
                           label="Type"
                           sx={{ padding: "12px 14px" }}
                         >
@@ -575,14 +589,17 @@ function SessionManagement() {
                             <Card sx={{ padding: 1, marginBottom: 1 }}>
                               <Grid container spacing={1}>
                                 <Grid item xs={3}>
-                                  <MDTypography variant="h6">{getUniversityNameById(session.universityId)}</MDTypography>
+                                  <MDTypography variant="h6">
+                                    {getUniversityNameById(session.universityId)}
+                                  </MDTypography>
                                 </Grid>
                                 <Grid item xs={5}>
                                   <MDTypography variant="body1">
                                     <strong>Topic:</strong> {getTopicNameById(session.topicId)}
                                   </MDTypography>
                                   <MDTypography variant="body1">
-                                    <strong>Subtopic:</strong> {getSubTopicNameById(session.subTopicId)}
+                                    <strong>Subtopic:</strong>{" "}
+                                    {getSubTopicNameById(session.subTopicId)}
                                   </MDTypography>
                                 </Grid>
                                 <Grid item xs={4} align="right">

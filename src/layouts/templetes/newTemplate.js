@@ -132,7 +132,7 @@ import DataTable from "examples/Tables/DataTable";
 //       <Dialog open={openImportModal} onClose={closeModal}>
 //         <DialogTitle>Import {templateConfig.header}</DialogTitle>
 //         <DialogContent>
-//           <Box mb={10} p={3}> 
+//           <Box mb={10} p={3}>
 //             <input type="file" accept=".xlsx" onChange={handleFileSelect} style={{ width: "100%" }} />
 //             {templateConfig.importSampleFile && (
 //               <a
@@ -277,7 +277,6 @@ import DataTable from "examples/Tables/DataTable";
 //   );
 // };
 
-
 const ImportExportActions = ({
   templateConfig,
   onImport,
@@ -291,7 +290,7 @@ const ImportExportActions = ({
   const [selectedFile, setSelectedFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const [warnings, setWarnings] = useState([]);
-  
+
   // Local state for modal filters
   const [modalFilters, setModalFilters] = useState({
     university: "",
@@ -300,7 +299,7 @@ const ImportExportActions = ({
     topic: "",
     subtopic: "",
   });
-  
+
   // Local state for dropdown options
   const [modalSubjects, setModalSubjects] = useState([]);
   const [modalGrades, setModalGrades] = useState([]);
@@ -353,7 +352,7 @@ const ImportExportActions = ({
 
       // Fetch subtopics
       // const subTopicRes = await fetch(`${process.env.REACT_APP_API_URL}/admin/subtopic`);
-      
+
       const subTopicRes = await fetch(
         `${process.env.REACT_APP_API_URL}/subtopics?topicId=${modalFilters.topic}`
       );
@@ -380,8 +379,8 @@ const ImportExportActions = ({
     formData.append("subjectId", modalFilters.subject || "");
     formData.append("gradeId", modalFilters.grade || "");
     formData.append("topicId", modalFilters.topic || "");
-   
-    if (modalFilters.subtopic ){
+
+    if (modalFilters.subtopic) {
       formData.append("subTopicId", modalFilters.subtopic || "");
     }
 
@@ -479,16 +478,18 @@ const ImportExportActions = ({
                 <InputLabel>University</InputLabel>
                 <Select
                   value={modalFilters.university}
-                  onChange={(e) => setModalFilters(prev => ({ ...prev, university: e.target.value }))}
+                  onChange={(e) =>
+                    setModalFilters((prev) => ({ ...prev, university: e.target.value }))
+                  }
                   label="University"
                   sx={{
-                    padding: '12px 14px', // Adjust padding as needed
-                    width: '100%', // Make the box larger by setting the width
-                    '& .MuiSelect-select': {
-                      padding: '12px 14px', // Adjust padding for the select input
+                    padding: "12px 14px", // Adjust padding as needed
+                    width: "100%", // Make the box larger by setting the width
+                    "& .MuiSelect-select": {
+                      padding: "12px 14px", // Adjust padding for the select input
                     },
-                    '& .MuiOutlinedInput-root': {
-                      padding: '12px 14px', // Adjust padding for the outlined input
+                    "& .MuiOutlinedInput-root": {
+                      padding: "12px 14px", // Adjust padding for the outlined input
                     },
                   }}
                 >
@@ -498,7 +499,6 @@ const ImportExportActions = ({
                       {uni.name}
                     </MenuItem>
                   ))}
-                  
                 </Select>
               </FormControl>
             </Grid>
@@ -507,27 +507,29 @@ const ImportExportActions = ({
               <FormControl fullWidth variant="outlined">
                 <InputLabel>Subject</InputLabel>
                 <Select
-  value={modalFilters.subject}
-  onChange={(e) => setModalFilters(prev => ({ ...prev, subject: e.target.value }))}
-  label="Subject"
-  sx={{
-    padding: '12px 14px', // Adjust padding as needed
-    width: '100%', // Make the box larger by setting the width
-    '& .MuiSelect-select': {
-      padding: '12px 14px', // Adjust padding for the select input
-    },
-    '& .MuiOutlinedInput-root': {
-      padding: '12px 14px', // Adjust padding for the outlined input
-    },
-  }}
->
-  <MenuItem value="">All</MenuItem>
-  {modalSubjects.map((sub) => (
-    <MenuItem key={sub.id} value={sub.id}>
-      {sub.name}
-    </MenuItem>
-  ))}
-</Select>
+                  value={modalFilters.subject}
+                  onChange={(e) =>
+                    setModalFilters((prev) => ({ ...prev, subject: e.target.value }))
+                  }
+                  label="Subject"
+                  sx={{
+                    padding: "12px 14px", // Adjust padding as needed
+                    width: "100%", // Make the box larger by setting the width
+                    "& .MuiSelect-select": {
+                      padding: "12px 14px", // Adjust padding for the select input
+                    },
+                    "& .MuiOutlinedInput-root": {
+                      padding: "12px 14px", // Adjust padding for the outlined input
+                    },
+                  }}
+                >
+                  <MenuItem value="">All</MenuItem>
+                  {modalSubjects.map((sub) => (
+                    <MenuItem key={sub.id} value={sub.id}>
+                      {sub.name}
+                    </MenuItem>
+                  ))}
+                </Select>
               </FormControl>
             </Grid>
 
@@ -536,16 +538,16 @@ const ImportExportActions = ({
                 <InputLabel>Grade</InputLabel>
                 <Select
                   value={modalFilters.grade}
-                  onChange={(e) => setModalFilters(prev => ({ ...prev, grade: e.target.value }))}
+                  onChange={(e) => setModalFilters((prev) => ({ ...prev, grade: e.target.value }))}
                   label="Grade"
                   sx={{
-                    padding: '12px 14px', // Adjust padding as needed
-                    width: '100%', // Make the box larger by setting the width
-                    '& .MuiSelect-select': {
-                      padding: '12px 14px', // Adjust padding for the select input
+                    padding: "12px 14px", // Adjust padding as needed
+                    width: "100%", // Make the box larger by setting the width
+                    "& .MuiSelect-select": {
+                      padding: "12px 14px", // Adjust padding for the select input
                     },
-                    '& .MuiOutlinedInput-root': {
-                      padding: '12px 14px', // Adjust padding for the outlined input
+                    "& .MuiOutlinedInput-root": {
+                      padding: "12px 14px", // Adjust padding for the outlined input
                     },
                   }}
                 >
@@ -564,16 +566,16 @@ const ImportExportActions = ({
                 <InputLabel>Topic</InputLabel>
                 <Select
                   value={modalFilters.topic}
-                  onChange={(e) => setModalFilters(prev => ({ ...prev, topic: e.target.value }))}
+                  onChange={(e) => setModalFilters((prev) => ({ ...prev, topic: e.target.value }))}
                   label="Topic"
                   sx={{
-                    padding: '12px 14px', // Adjust padding as needed
-                    width: '100%', // Make the box larger by setting the width
-                    '& .MuiSelect-select': {
-                      padding: '12px 14px', // Adjust padding for the select input
+                    padding: "12px 14px", // Adjust padding as needed
+                    width: "100%", // Make the box larger by setting the width
+                    "& .MuiSelect-select": {
+                      padding: "12px 14px", // Adjust padding for the select input
                     },
-                    '& .MuiOutlinedInput-root': {
-                      padding: '12px 14px', // Adjust padding for the outlined input
+                    "& .MuiOutlinedInput-root": {
+                      padding: "12px 14px", // Adjust padding for the outlined input
                     },
                   }}
                 >
@@ -592,16 +594,18 @@ const ImportExportActions = ({
                 <InputLabel>Subtopic</InputLabel>
                 <Select
                   value={modalFilters.subtopic}
-                  onChange={(e) => setModalFilters(prev => ({ ...prev, subtopic: e.target.value }))}
+                  onChange={(e) =>
+                    setModalFilters((prev) => ({ ...prev, subtopic: e.target.value }))
+                  }
                   label="Subtopic"
                   sx={{
-                    padding: '12px 14px', // Adjust padding as neeeded
-                    width: '100%', // Make the box larger by setting the width
-                    '& .MuiSelect-select': {
-                      padding: '12px 14px', // Adjust padding for the select input
+                    padding: "12px 14px", // Adjust padding as neeeded
+                    width: "100%", // Make the box larger by setting the width
+                    "& .MuiSelect-select": {
+                      padding: "12px 14px", // Adjust padding for the select input
                     },
-                    '& .MuiOutlinedInput-root': {
-                      padding: '12px 14px', // Adjust padding for the outlined input
+                    "& .MuiOutlinedInput-root": {
+                      padding: "12px 14px", // Adjust padding for the outlined input
                     },
                   }}
                 >
@@ -644,13 +648,18 @@ const ImportExportActions = ({
   );
 };
 
-
 const NewTempletesScreen = () => {
   const [selectedTemplate, setSelectedTemplate] = useState(Object.keys(TEMPLET_SCREEN_CONFIG)[0]);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [totalEntries, setTotalEntries] = useState(0);
-  const [filters, setFilters] = useState({ university: "", subject: "", grade: "", topic: "", subtopic: "" });
+  const [filters, setFilters] = useState({
+    university: "",
+    subject: "",
+    grade: "",
+    topic: "",
+    subtopic: "",
+  });
   console.log(filters);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -716,43 +725,51 @@ const NewTempletesScreen = () => {
 
   const fetchDropdownOptions = async () => {
     try {
-        // Fetch universities
-        const universityRes = await fetch(`${process.env.REACT_APP_API_URL}/admin/university`);
-        const universityData = await universityRes.json();
-        setUniversities(universityData.data.reverse() || []);
+      // Fetch universities
+      const universityRes = await fetch(`${process.env.REACT_APP_API_URL}/admin/university`);
+      const universityData = await universityRes.json();
+      setUniversities(universityData.data.reverse() || []);
 
-        // Fetch subjects and grades if a university is selected
-        if (selectedUniversityId) {
-            const subjectRes = await fetch(`${process.env.REACT_APP_API_URL}/admin/subject?universityId=${selectedUniversityId}`);
-            const subjectData = await subjectRes.json();
-            setSubjects(subjectData.data.reverse() || []);
+      // Fetch subjects and grades if a university is selected
+      if (selectedUniversityId) {
+        const subjectRes = await fetch(
+          `${process.env.REACT_APP_API_URL}/admin/subject?universityId=${selectedUniversityId}`
+        );
+        const subjectData = await subjectRes.json();
+        setSubjects(subjectData.data.reverse() || []);
 
-            const gradeRes = await fetch(`${process.env.REACT_APP_API_URL}/admin/grade?universityId=${selectedUniversityId}`);
-            const gradeData = await gradeRes.json();
-            setGrades(gradeData.data.reverse() || []);
-        } else {
-            setSubjects([]);
-            setGrades([]);
-        }
+        const gradeRes = await fetch(
+          `${process.env.REACT_APP_API_URL}/admin/grade?universityId=${selectedUniversityId}`
+        );
+        const gradeData = await gradeRes.json();
+        setGrades(gradeData.data.reverse() || []);
+      } else {
+        setSubjects([]);
+        setGrades([]);
+      }
 
-        // Fetch topics
-        const topicRes = await fetch(`${process.env.REACT_APP_API_URL}/topics?universityId=${selectedUniversityId}&subjectId=${filters.subject}&gradeId=${filters.grade}`);
-        const topicData = await topicRes.json();
-        setTopics(topicData || []);
+      // Fetch topics
+      const topicRes = await fetch(
+        `${process.env.REACT_APP_API_URL}/topics?universityId=${selectedUniversityId}&subjectId=${filters.subject}&gradeId=${filters.grade}`
+      );
+      const topicData = await topicRes.json();
+      setTopics(topicData || []);
 
-        // Ensure topics are fetched before fetching subtopics
-        if (topicData && topicData.length > 0) {
-            const topicId = topicData[0].id; // Assuming you want the first topic's ID
-            const subTopicRes = await fetch(`${process.env.REACT_APP_API_URL}/subtopics?topicId=${topicId}`);
-            const subTopicData = await subTopicRes.json();
-            setSubTopics(subTopicData || []);
-        } else {
-            setSubTopics([]);
-        }
+      // Ensure topics are fetched before fetching subtopics
+      if (topicData && topicData.length > 0) {
+        const topicId = topicData[0].id; // Assuming you want the first topic's ID
+        const subTopicRes = await fetch(
+          `${process.env.REACT_APP_API_URL}/subtopics?topicId=${topicId}`
+        );
+        const subTopicData = await subTopicRes.json();
+        setSubTopics(subTopicData || []);
+      } else {
+        setSubTopics([]);
+      }
     } catch (error) {
-        console.error("Error fetching dropdown data:", error);
+      console.error("Error fetching dropdown data:", error);
     }
-};
+  };
 
   useEffect(() => {
     fetchData();

@@ -48,7 +48,6 @@ import Audiobooks from "layouts/tables/Audiobook";
 import Stories from "layouts/tables/Stories";
 import UserInfo from "layouts/tables/Users";
 
-
 const routes = [
   {
     type: "collapse",
@@ -65,7 +64,7 @@ const routes = [
     key: "User",
     icon: <Icon fontSize="small">group</Icon>,
     route: "/Users",
-    component: <UserInfo/>,
+    component: <UserInfo />,
   },
 
   {
@@ -77,8 +76,8 @@ const routes = [
       <i className="material-icons" style={{ color: "white" }}>
         group
       </i>
-    ), 
-    component: <Genres/>, 
+    ),
+    component: <Genres />,
     layout: "/admin",
   },
   {
@@ -90,8 +89,8 @@ const routes = [
       <i className="material-icons" style={{ color: "white" }}>
         group
       </i>
-    ), 
-    component: <Creators/>, 
+    ),
+    component: <Creators />,
     layout: "/admin",
   },
 
@@ -104,8 +103,8 @@ const routes = [
       <i className="material-icons" style={{ color: "white" }}>
         group
       </i>
-    ), 
-    component: <Podcastscomp/>, 
+    ),
+    component: <Podcastscomp />,
     layout: "/admin",
   },
 
@@ -118,8 +117,8 @@ const routes = [
       <i className="material-icons" style={{ color: "white" }}>
         group
       </i>
-    ), 
-    component: <Audiobooks/>, 
+    ),
+    component: <Audiobooks />,
     layout: "/admin",
   },
 
@@ -132,8 +131,8 @@ const routes = [
       <i className="material-icons" style={{ color: "white" }}>
         group
       </i>
-    ), 
-    component: <Stories/>, 
+    ),
+    component: <Stories />,
     layout: "/admin",
   },
 
@@ -146,19 +145,17 @@ const routes = [
       <i className="material-icons" style={{ color: "white" }}>
         group
       </i>
-    ), 
-    component: <Episodes/>, 
+    ),
+    component: <Episodes />,
     layout: "/admin",
   },
 
   {
- 
     route: "/authentication/sign-in",
-  
+
     component: <SignIn />,
   },
   {
- 
     route: "/authentication/sign-up",
     component: <SignUp />,
   },

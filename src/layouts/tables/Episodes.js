@@ -59,7 +59,7 @@ function Episodes() {
           },
         });
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error("Network response was not ok");
         }
         const data = await response.json();
         if (data && data.success && data.data) {
@@ -82,7 +82,7 @@ function Episodes() {
           },
         });
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error("Network response was not ok");
         }
         const data = await response.json();
         if (data) {
@@ -103,7 +103,7 @@ function Episodes() {
           },
         });
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error("Network response was not ok");
         }
         const data = await response.json();
         if (data) {
@@ -124,7 +124,7 @@ function Episodes() {
           },
         });
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error("Network response was not ok");
         }
         const data = await response.json();
         if (data) {
@@ -146,25 +146,25 @@ function Episodes() {
     try {
       const token = localStorage.getItem("token");
       const formData = new FormData();
-      formData.append('title', newEpisode.title);
-      formData.append('name', newEpisode.name);
-      formData.append('season', newEpisode.season);
-      formData.append('episode', newEpisode.episode);
-      formData.append('description', newEpisode.description);
-      formData.append('creator_name', newEpisode.creator_name);
+      formData.append("title", newEpisode.title);
+      formData.append("name", newEpisode.name);
+      formData.append("season", newEpisode.season);
+      formData.append("episode", newEpisode.episode);
+      formData.append("description", newEpisode.description);
+      formData.append("creator_name", newEpisode.creator_name);
       if (newEpisode.image) {
-        formData.append('image', newEpisode.image);
+        formData.append("image", newEpisode.image);
       }
       if (newEpisode.audio) {
-        formData.append('audio', newEpisode.audio);
+        formData.append("audio", newEpisode.audio);
       }
 
-      if (selectedMediaType === 'story') {
-        formData.append('story_id', newEpisode.story_id);
-      } else if (selectedMediaType === 'podcast') {
-        formData.append('podcastId', newEpisode.podcastId);
-      } else if (selectedMediaType === 'audiobook') {
-        formData.append('audiobook_id', newEpisode.audiobook_id);
+      if (selectedMediaType === "story") {
+        formData.append("story_id", newEpisode.story_id);
+      } else if (selectedMediaType === "podcast") {
+        formData.append("podcastId", newEpisode.podcastId);
+      } else if (selectedMediaType === "audiobook") {
+        formData.append("audiobook_id", newEpisode.audiobook_id);
       }
 
       const response = await fetch("https://lumeromind.shellcode.website/api/admin/episodes", {
@@ -175,7 +175,7 @@ function Episodes() {
         body: formData,
       });
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error("Network response was not ok");
       }
       const result = await response.json();
 
@@ -215,25 +215,25 @@ function Episodes() {
     try {
       const token = localStorage.getItem("token");
       const formData = new FormData();
-      formData.append('title', newEpisode.title);
-      formData.append('name', newEpisode.name);
-      formData.append('season', newEpisode.season);
-      formData.append('episode', newEpisode.episode);
-      formData.append('description', newEpisode.description);
-      formData.append('creator_name', newEpisode.creator_name);
+      formData.append("title", newEpisode.title);
+      formData.append("name", newEpisode.name);
+      formData.append("season", newEpisode.season);
+      formData.append("episode", newEpisode.episode);
+      formData.append("description", newEpisode.description);
+      formData.append("creator_name", newEpisode.creator_name);
       if (newEpisode.image) {
-        formData.append('image', newEpisode.image);
+        formData.append("image", newEpisode.image);
       }
       if (newEpisode.audio) {
-        formData.append('audio', newEpisode.audio);
+        formData.append("audio", newEpisode.audio);
       }
 
-      if (selectedMediaType === 'story') {
-        formData.append('story_id', newEpisode.story_id);
-      } else if (selectedMediaType === 'podcast') {
-        formData.append('podcastId', newEpisode.podcastId);
-      } else if (selectedMediaType === 'audiobook') {
-        formData.append('audiobook_id', newEpisode.audiobook_id);
+      if (selectedMediaType === "story") {
+        formData.append("story_id", newEpisode.story_id);
+      } else if (selectedMediaType === "podcast") {
+        formData.append("podcastId", newEpisode.podcastId);
+      } else if (selectedMediaType === "audiobook") {
+        formData.append("audiobook_id", newEpisode.audiobook_id);
       }
 
       const response = await fetch(
@@ -247,7 +247,7 @@ function Episodes() {
         }
       );
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error("Network response was not ok");
       }
       const result = await response.json();
 
@@ -297,14 +297,12 @@ function Episodes() {
           }
         );
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error("Network response was not ok");
         }
         const result = await response.json();
 
         if (result.success) {
-          setEpisodes((prevEpisodes) =>
-            prevEpisodes.filter((episode) => episode.id !== episodeId)
-          );
+          setEpisodes((prevEpisodes) => prevEpisodes.filter((episode) => episode.id !== episodeId));
           alert("Episode deleted successfully!");
         } else {
           alert(result.message || "Failed to delete episode");
@@ -317,7 +315,7 @@ function Episodes() {
   };
 
   const handleInputChange = (e) => {
-    if (e.target.name === 'image' || e.target.name === 'audio') {
+    if (e.target.name === "image" || e.target.name === "audio") {
       setNewEpisode({ ...newEpisode, [e.target.name]: e.target.files[0] });
     } else {
       setNewEpisode({ ...newEpisode, [e.target.name]: e.target.value });
@@ -329,7 +327,9 @@ function Episodes() {
       setNewEpisode({
         ...episode,
       });
-      setSelectedMediaType(episode.story_id ? 'story' : episode.podcastId ? 'podcast' : 'audiobook');
+      setSelectedMediaType(
+        episode.story_id ? "story" : episode.podcastId ? "podcast" : "audiobook"
+      );
     } else {
       setNewEpisode({
         title: "",
@@ -357,7 +357,16 @@ function Episodes() {
           <Grid container spacing={6}>
             <Grid item xs={12}>
               <Card>
-                <MDBox mx={2} mt={-3} py={3} px={2} variant="gradient" bgColor="info" borderRadius="lg" coloredShadow="info">
+                <MDBox
+                  mx={2}
+                  mt={-3}
+                  py={3}
+                  px={2}
+                  variant="gradient"
+                  bgColor="info"
+                  borderRadius="lg"
+                  coloredShadow="info"
+                >
                   <MDTypography variant="h6" color="white">
                     Loading Episodes Data...
                   </MDTypography>
@@ -381,7 +390,7 @@ function Episodes() {
         <img
           src={row.original.image}
           alt={row.original.title}
-          style={{ width: '50px', height: '50px', borderRadius: '50%' }}
+          style={{ width: "50px", height: "50px", borderRadius: "50%" }}
         />
       ),
     },
@@ -403,9 +412,9 @@ function Episodes() {
           onClick={() => {
             const audioUrl = row.original.audio_file;
             if (audioUrl) {
-              window.open(audioUrl, '_blank');
+              window.open(audioUrl, "_blank");
             } else {
-              alert('No audio file available');
+              alert("No audio file available");
             }
           }}
           sx={{ marginLeft: 1 }}
@@ -447,14 +456,29 @@ function Episodes() {
         <Grid container spacing={6}>
           <Grid item xs={12}>
             <Card>
-              <MDBox mx={2} mt={-3} py={3} px={2} variant="gradient" bgColor="info" borderRadius="lg" coloredShadow="info">
+              <MDBox
+                mx={2}
+                mt={-3}
+                py={3}
+                px={2}
+                variant="gradient"
+                bgColor="info"
+                borderRadius="lg"
+                coloredShadow="info"
+              >
                 <MDTypography variant="h6" color="white">
-                  Episodes 
+                  Episodes
                 </MDTypography>
               </MDBox>
               <MDBox pt={3} sx={{ display: "flex", flexDirection: "column", height: "400px" }}>
                 <MDBox sx={{ flex: 1, overflow: "auto" }}>
-                  <DataTable table={{ columns, rows: episodes }} isSorted={false} entriesPerPage={false} showTotalEntries={false} noEndBorder />
+                  <DataTable
+                    table={{ columns, rows: episodes }}
+                    isSorted={false}
+                    entriesPerPage={false}
+                    showTotalEntries={false}
+                    noEndBorder
+                  />
                 </MDBox>
                 <Button
                   variant="contained"
@@ -501,34 +525,34 @@ function Episodes() {
               value={selectedMediaType}
               onChange={(e) => setSelectedMediaType(e.target.value)}
               label="Media Type"
-                sx={{
-                            backgroundColor: "#ffffff",
-                            borderRadius: "10px",
-                            color: "black",
-                            height: "40px",
-                            fontSize: "1rem",
-                            "& .MuiInputBase-root": {
-                              color: "black",
-                            },
-                            "& .MuiOutlinedInput-root": {
-                              "& fieldset": {
-                                borderColor: "black",
-                              },
-                              "&:hover fieldset": {
-                                borderColor: "black",
-                              },
-                              "&.Mui-focused fieldset": {
-                                borderColor: "black",
-                              },
-                            },
-                          }}
+              sx={{
+                backgroundColor: "#ffffff",
+                borderRadius: "10px",
+                color: "black",
+                height: "40px",
+                fontSize: "1rem",
+                "& .MuiInputBase-root": {
+                  color: "black",
+                },
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    borderColor: "black",
+                  },
+                  "&:hover fieldset": {
+                    borderColor: "black",
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderColor: "black",
+                  },
+                },
+              }}
             >
               <MenuItem value="story">Story</MenuItem>
               <MenuItem value="podcast">Podcast</MenuItem>
               <MenuItem value="audiobook">Audiobook</MenuItem>
             </Select>
           </FormControl>
-          {selectedMediaType === 'story' && (
+          {selectedMediaType === "story" && (
             <FormControl fullWidth margin="normal">
               <InputLabel id="story-select-label">Story</InputLabel>
               <Select
@@ -538,27 +562,27 @@ function Episodes() {
                 value={newEpisode.story_id}
                 onChange={handleInputChange}
                 label="Story"
-                  sx={{
-                              backgroundColor: "#ffffff",
-                              borderRadius: "10px",
-                              color: "black",
-                              height: "40px",
-                              fontSize: "1rem",
-                              "& .MuiInputBase-root": {
-                                color: "black",
-                              },
-                              "& .MuiOutlinedInput-root": {
-                                "& fieldset": {
-                                  borderColor: "black",
-                                },
-                                "&:hover fieldset": {
-                                  borderColor: "black",
-                                },
-                                "&.Mui-focused fieldset": {
-                                  borderColor: "black",
-                                },
-                              },
-                            }}
+                sx={{
+                  backgroundColor: "#ffffff",
+                  borderRadius: "10px",
+                  color: "black",
+                  height: "40px",
+                  fontSize: "1rem",
+                  "& .MuiInputBase-root": {
+                    color: "black",
+                  },
+                  "& .MuiOutlinedInput-root": {
+                    "& fieldset": {
+                      borderColor: "black",
+                    },
+                    "&:hover fieldset": {
+                      borderColor: "black",
+                    },
+                    "&.Mui-focused fieldset": {
+                      borderColor: "black",
+                    },
+                  },
+                }}
               >
                 {stories.map((story) => (
                   <MenuItem key={story.id} value={story.id}>
@@ -568,7 +592,7 @@ function Episodes() {
               </Select>
             </FormControl>
           )}
-          {selectedMediaType === 'podcast' && (
+          {selectedMediaType === "podcast" && (
             <FormControl fullWidth margin="normal">
               <InputLabel id="podcast-select-label">Podcast</InputLabel>
               <Select
@@ -608,7 +632,7 @@ function Episodes() {
               </Select>
             </FormControl>
           )}
-          {selectedMediaType === 'audiobook' && (
+          {selectedMediaType === "audiobook" && (
             <FormControl fullWidth margin="normal">
               <InputLabel id="audiobook-select-label">Audiobook</InputLabel>
               <Select
@@ -690,25 +714,20 @@ function Episodes() {
             onChange={handleInputChange}
             margin="normal"
           />
-          <input
-            type="file"
-            name="image"
-            onChange={handleInputChange}
-          />
+          <input type="file" name="image" onChange={handleInputChange} />
           <p>Upload Image</p>
-            
-          <input
-            type="file"
-            name="audio"
-            onChange={handleInputChange}
-          />
-             <p>Upload Audio</p>
+
+          <input type="file" name="audio" onChange={handleInputChange} />
+          <p>Upload Audio</p>
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setOpenModal(false)} color="primary">
             Cancel
           </Button>
-          <Button onClick={newEpisode.id ? handleUpdateEpisode : handleCreateEpisode} color="primary">
+          <Button
+            onClick={newEpisode.id ? handleUpdateEpisode : handleCreateEpisode}
+            color="primary"
+          >
             {newEpisode.id ? "Update" : "Create"}
           </Button>
         </DialogActions>

@@ -54,7 +54,7 @@ function Podcasts() {
         },
       });
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error("Network response was not ok");
       }
       const data = await response.json();
       if (data && data.message === "All podcasts fetched successfully") {
@@ -77,7 +77,7 @@ function Podcasts() {
         },
       });
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error("Network response was not ok");
       }
       const data = await response.json();
       if (data && data.message === "Genres fetched successfully") {
@@ -98,7 +98,7 @@ function Podcasts() {
         },
       });
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error("Network response was not ok");
       }
       const data = await response.json();
       if (data && Array.isArray(data)) {
@@ -120,15 +120,15 @@ function Podcasts() {
     try {
       const token = localStorage.getItem("token");
       const formData = new FormData();
-      formData.append('name', newPodcast.name);
-      formData.append('show_title', newPodcast.show_title);
-      formData.append('description', newPodcast.description);
-      formData.append('creator_id', newPodcast.creator_id);
-      formData.append('genre_id', newPodcast.genre_id);
-      formData.append('creator_name', newPodcast.creator_name);
-      formData.append('genre_name', newPodcast.genre_name);
+      formData.append("name", newPodcast.name);
+      formData.append("show_title", newPodcast.show_title);
+      formData.append("description", newPodcast.description);
+      formData.append("creator_id", newPodcast.creator_id);
+      formData.append("genre_id", newPodcast.genre_id);
+      formData.append("creator_name", newPodcast.creator_name);
+      formData.append("genre_name", newPodcast.genre_name);
       if (newPodcast.image) {
-        formData.append('image', newPodcast.image);
+        formData.append("image", newPodcast.image);
       }
 
       const response = await fetch("https://lumeromind.shellcode.website/api/admin/podcast", {
@@ -139,7 +139,7 @@ function Podcasts() {
         body: formData,
       });
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error("Network response was not ok");
       }
       const result = await response.json();
 
@@ -171,15 +171,15 @@ function Podcasts() {
     try {
       const token = localStorage.getItem("token");
       const formData = new FormData();
-      formData.append('name', newPodcast.name);
-      formData.append('show_title', newPodcast.show_title);
-      formData.append('description', newPodcast.description);
-      formData.append('creator_id', newPodcast.creator_id);
-      formData.append('genre_id', newPodcast.genre_id);
-      formData.append('creator_name', newPodcast.creator_name);
-      formData.append('genre_name', newPodcast.genre_name);
+      formData.append("name", newPodcast.name);
+      formData.append("show_title", newPodcast.show_title);
+      formData.append("description", newPodcast.description);
+      formData.append("creator_id", newPodcast.creator_id);
+      formData.append("genre_id", newPodcast.genre_id);
+      formData.append("creator_name", newPodcast.creator_name);
+      formData.append("genre_name", newPodcast.genre_name);
       if (newPodcast.image) {
-        formData.append('image', newPodcast.image);
+        formData.append("image", newPodcast.image);
       }
 
       const response = await fetch(
@@ -193,7 +193,7 @@ function Podcasts() {
         }
       );
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error("Network response was not ok");
       }
       const result = await response.json();
 
@@ -236,7 +236,7 @@ function Podcasts() {
           }
         );
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error("Network response was not ok");
         }
         const result = await response.json();
 
@@ -255,7 +255,7 @@ function Podcasts() {
   };
 
   const handleInputChange = (e) => {
-    if (e.target.name === 'image') {
+    if (e.target.name === "image") {
       setNewPodcast({ ...newPodcast, [e.target.name]: e.target.files[0] });
     } else {
       setNewPodcast({ ...newPodcast, [e.target.name]: e.target.value });
@@ -290,7 +290,16 @@ function Podcasts() {
           <Grid container spacing={6}>
             <Grid item xs={12}>
               <Card>
-                <MDBox mx={2} mt={-3} py={3} px={2} variant="gradient" bgColor="info" borderRadius="lg" coloredShadow="info">
+                <MDBox
+                  mx={2}
+                  mt={-3}
+                  py={3}
+                  px={2}
+                  variant="gradient"
+                  bgColor="info"
+                  borderRadius="lg"
+                  coloredShadow="info"
+                >
                   <MDTypography variant="h6" color="white">
                     Loading Podcasts Data...
                   </MDTypography>
@@ -320,7 +329,7 @@ function Podcasts() {
         <img
           src={row.original.image}
           alt={row.original.name}
-          style={{ width: '50px', height: '50px', borderRadius: '50%' }}
+          style={{ width: "50px", height: "50px", borderRadius: "50%" }}
         />
       ),
     },
@@ -357,14 +366,29 @@ function Podcasts() {
         <Grid container spacing={6}>
           <Grid item xs={12}>
             <Card>
-              <MDBox mx={2} mt={-3} py={3} px={2} variant="gradient" bgColor="info" borderRadius="lg" coloredShadow="info">
+              <MDBox
+                mx={2}
+                mt={-3}
+                py={3}
+                px={2}
+                variant="gradient"
+                bgColor="info"
+                borderRadius="lg"
+                coloredShadow="info"
+              >
                 <MDTypography variant="h6" color="white">
-                  Podcasts 
+                  Podcasts
                 </MDTypography>
               </MDBox>
               <MDBox pt={3} sx={{ display: "flex", flexDirection: "column", height: "400px" }}>
                 <MDBox sx={{ flex: 1, overflow: "auto" }}>
-                  <DataTable table={{ columns, rows: podcasts }} isSorted={false} entriesPerPage={false} showTotalEntries={false} noEndBorder />
+                  <DataTable
+                    table={{ columns, rows: podcasts }}
+                    isSorted={false}
+                    entriesPerPage={false}
+                    showTotalEntries={false}
+                    noEndBorder
+                  />
                 </MDBox>
                 <Button
                   variant="contained"
@@ -422,43 +446,38 @@ function Podcasts() {
             options={creators}
             getOptionLabel={(option) => option.creatorName}
             value={creators.find((creator) => creator.id === newPodcast.creator_id) || null}
-            onChange={(event, value) => setNewPodcast({ ...newPodcast, creator_id: value?.id, creator_name: value?.creatorName })}
+            onChange={(event, value) =>
+              setNewPodcast({
+                ...newPodcast,
+                creator_id: value?.id,
+                creator_name: value?.creatorName,
+              })
+            }
             renderInput={(params) => (
-              <TextField
-                {...params}
-                label="Creator"
-                fullWidth
-                name="creator_id"
-                margin="normal"
-              />
+              <TextField {...params} label="Creator" fullWidth name="creator_id" margin="normal" />
             )}
           />
           <Autocomplete
             options={genres}
             getOptionLabel={(option) => option.genre_name}
             value={genres.find((genre) => genre.id === newPodcast.genre_id) || null}
-            onChange={(event, value) => setNewPodcast({ ...newPodcast, genre_id: value?.id, genre_name: value?.genre_name })}
+            onChange={(event, value) =>
+              setNewPodcast({ ...newPodcast, genre_id: value?.id, genre_name: value?.genre_name })
+            }
             renderInput={(params) => (
-              <TextField
-                {...params}
-                label="Genre"
-                fullWidth
-                name="genre_id"
-                margin="normal"
-              />
+              <TextField {...params} label="Genre" fullWidth name="genre_id" margin="normal" />
             )}
           />
-          <input
-            type="file"
-            name="image"
-            onChange={handleInputChange}
-          />
+          <input type="file" name="image" onChange={handleInputChange} />
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setOpenModal(false)} color="primary">
             Cancel
           </Button>
-          <Button onClick={newPodcast.id ? handleUpdatePodcast : handleCreatePodcast} color="primary">
+          <Button
+            onClick={newPodcast.id ? handleUpdatePodcast : handleCreatePodcast}
+            color="primary"
+          >
             {newPodcast.id ? "Update" : "Create"}
           </Button>
         </DialogActions>

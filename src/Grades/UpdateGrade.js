@@ -52,12 +52,18 @@ export default function UpdateGrade() {
   };
 
   if (loading) {
-    return <MDTypography variant="h6" color="text">Loading...</MDTypography>;
+    return (
+      <MDTypography variant="h6" color="text">
+        Loading...
+      </MDTypography>
+    );
   }
 
   return (
     <MDBox>
-      <MDTypography variant="h4" gutterBottom>Update Grade</MDTypography>
+      <MDTypography variant="h4" gutterBottom>
+        Update Grade
+      </MDTypography>
       <form onSubmit={handleSubmit}>
         <MDBox marginBottom={2}>
           <MDTypography variant="h6">Grade Name</MDTypography>
