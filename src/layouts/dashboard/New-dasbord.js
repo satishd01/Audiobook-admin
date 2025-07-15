@@ -21,7 +21,7 @@ function NEWDashboard() {
     const fetchDashboardData = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.get("https://audiobook.shellcode.cloud/api/dashboard", {
+        const response = await axios.get("https://lumeromind.shellcode.website/api/dashboard", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
