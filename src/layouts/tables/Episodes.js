@@ -53,7 +53,7 @@ function Episodes() {
     const fetchEpisodes = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await fetch("https://audiobook.shellcode.cloud/api/admin/allEpisodes", {
+        const response = await fetch("https://lumeromind.shellcode.website/api/admin/allEpisodes", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -76,7 +76,7 @@ function Episodes() {
     const fetchPodcasts = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await fetch("https://audiobook.shellcode.cloud/api/admin/podcasts", {
+        const response = await fetch("https://lumeromind.shellcode.website/api/admin/podcasts", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -97,7 +97,7 @@ function Episodes() {
     const fetchAudiobooks = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await fetch("https://audiobook.shellcode.cloud/api/audiobooks", {
+        const response = await fetch("https://lumeromind.shellcode.website/api/audiobooks", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -118,7 +118,7 @@ function Episodes() {
     const fetchStories = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await fetch("https://audiobook.shellcode.cloud/api/stories", {
+        const response = await fetch("https://lumeromind.shellcode.website/api/stories", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -167,7 +167,7 @@ function Episodes() {
         formData.append('audiobook_id', newEpisode.audiobook_id);
       }
 
-      const response = await fetch("https://audiobook.shellcode.cloud/api/admin/episodes", {
+      const response = await fetch("https://lumeromind.shellcode.website/api/admin/episodes", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -237,7 +237,7 @@ function Episodes() {
       }
 
       const response = await fetch(
-        `https://audiobook.shellcode.cloud/api/admin/episodes/${newEpisode.id}`,
+        `https://lumeromind.shellcode.website/api/admin/episodes/${newEpisode.id}`,
         {
           method: "PUT",
           headers: {
@@ -288,7 +288,7 @@ function Episodes() {
       try {
         const token = localStorage.getItem("token");
         const response = await fetch(
-          `https://audiobook.shellcode.cloud/api/admin/episodes/${episodeId}`,
+          `https://lumeromind.shellcode.website/api/admin/episodes/${episodeId}`,
           {
             method: "DELETE",
             headers: {

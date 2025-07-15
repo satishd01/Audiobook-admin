@@ -48,7 +48,7 @@ function Podcasts() {
   const fetchPodcasts = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("https://audiobook.shellcode.cloud/api/admin/podcasts", {
+      const response = await fetch("https://lumeromind.shellcode.website/api/admin/podcasts", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -71,7 +71,7 @@ function Podcasts() {
   const fetchGenres = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("https://audiobook.shellcode.cloud/api/admin/genre/all", {
+      const response = await fetch("https://lumeromind.shellcode.website/api/admin/genre/all", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -92,7 +92,7 @@ function Podcasts() {
   const fetchCreators = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("https://audiobook.shellcode.cloud/api/admin/creator", {
+      const response = await fetch("https://lumeromind.shellcode.website/api/admin/creator", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -131,7 +131,7 @@ function Podcasts() {
         formData.append('image', newPodcast.image);
       }
 
-      const response = await fetch("https://audiobook.shellcode.cloud/api/admin/podcast", {
+      const response = await fetch("https://lumeromind.shellcode.website/api/admin/podcast", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -183,7 +183,7 @@ function Podcasts() {
       }
 
       const response = await fetch(
-        `https://audiobook.shellcode.cloud/api/admin/podcasts/${newPodcast.id}`,
+        `https://lumeromind.shellcode.website/api/admin/podcasts/${newPodcast.id}`,
         {
           method: "PUT",
           headers: {
@@ -227,7 +227,7 @@ function Podcasts() {
       try {
         const token = localStorage.getItem("token");
         const response = await fetch(
-          `https://audiobook.shellcode.cloud/api/admin/podcasts/${podcastId}`,
+          `https://lumeromind.shellcode.website/api/admin/podcasts/${podcastId}`,
           {
             method: "DELETE",
             headers: {

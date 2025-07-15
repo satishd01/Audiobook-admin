@@ -44,7 +44,7 @@ function Creators() {
   const fetchCreators = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("https://audiobook.shellcode.cloud/api/admin/creator", {
+      const response = await fetch("https://lumeromind.shellcode.website/api/admin/creator", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -67,7 +67,7 @@ function Creators() {
   const fetchGenres = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("https://audiobook.shellcode.cloud/api/admin/genre/all", {
+      const response = await fetch("https://lumeromind.shellcode.website/api/admin/genre/all", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -106,7 +106,7 @@ function Creators() {
         formData.append('image', newCreator.image);
       }
 
-      const response = await fetch("https://audiobook.shellcode.cloud/api/admin/creator/create", {
+      const response = await fetch("https://lumeromind.shellcode.website/api/admin/creator/create", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -160,7 +160,7 @@ function Creators() {
       }
 
       const response = await fetch(
-        `https://audiobook.shellcode.cloud/api/admin/creator/${newCreator.id}`,
+        `https://lumeromind.shellcode.website/api/admin/creator/${newCreator.id}`,
         {
           method: "PUT",
           headers: {
@@ -205,7 +205,7 @@ function Creators() {
       try {
         const token = localStorage.getItem("token");
         const response = await fetch(
-          `https://audiobook.shellcode.cloud/api/admin/creator/creators/${creatorId}`,
+          `https://lumeromind.shellcode.website/api/admin/creator/creators/${creatorId}`,
           {
             method: "DELETE",
             headers: {

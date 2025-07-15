@@ -38,7 +38,7 @@ function Genres() {
     setLoading(true);
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("https://audiobook.shellcode.cloud/api/admin/genre/all", {
+      const response = await fetch("https://lumeromind.shellcode.website/api/admin/genre/all", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -72,7 +72,7 @@ function Genres() {
         formData.append('image', newGenre.image);
       }
 
-      const response = await fetch("https://audiobook.shellcode.cloud/api/admin/genre", {
+      const response = await fetch("https://lumeromind.shellcode.website/api/admin/genre", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -116,7 +116,7 @@ function Genres() {
       }
 
       const response = await fetch(
-        `https://audiobook.shellcode.cloud/api/admin/genre/${newGenre.id}`,
+        `https://lumeromind.shellcode.website/api/admin/genre/${newGenre.id}`,
         {
           method: "PUT",
           headers: {
@@ -160,7 +160,7 @@ function Genres() {
       try {
         const token = localStorage.getItem("token");
         const response = await fetch(
-          `https://audiobook.shellcode.cloud/api/admin/genre/${genreId}`,
+          `https://lumeromind.shellcode.website/api/admin/genre/${genreId}`,
           {
             method: "DELETE",
             headers: {

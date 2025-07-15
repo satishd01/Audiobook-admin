@@ -42,7 +42,7 @@ function UserInfo() {
     const fetchUserInfo = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await fetch("https://audiobook.shellcode.cloud/api/userinfo", {
+        const response = await fetch("https://lumeromind.shellcode.website/api/userinfo", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -71,7 +71,7 @@ function UserInfo() {
   const handleUpdateUserInfo = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(`https://audiobook.shellcode.cloud/api/userinfo/${newUserInfo.id}`, {
+      const response = await fetch(`https://lumeromind.shellcode.website/api/userinfo/${newUserInfo.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -117,7 +117,7 @@ function UserInfo() {
     if (confirmDelete) {
       try {
         const token = localStorage.getItem("token");
-        const response = await fetch(`https://audiobook.shellcode.cloud/api/userinfo/${userId}`, {
+        const response = await fetch(`https://lumeromind.shellcode.website/api/userinfo/${userId}`, {
           method: "DELETE",
           headers: {
             Authorization: `Bearer ${token}`,

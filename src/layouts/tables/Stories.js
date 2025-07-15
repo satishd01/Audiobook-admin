@@ -52,7 +52,7 @@ function Stories() {
     const fetchStories = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await fetch("https://audiobook.shellcode.cloud/api/stories", {
+        const response = await fetch("https://lumeromind.shellcode.website/api/stories", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -75,7 +75,7 @@ function Stories() {
     const fetchGenres = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await fetch("https://audiobook.shellcode.cloud/api/admin/genre/all", {
+        const response = await fetch("https://lumeromind.shellcode.website/api/admin/genre/all", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -96,7 +96,7 @@ function Stories() {
     const fetchCreators = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await fetch("https://audiobook.shellcode.cloud/api/admin/creator", {
+        const response = await fetch("https://lumeromind.shellcode.website/api/admin/creator", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -134,7 +134,7 @@ function Stories() {
         formData.append('image', newStory.image);
       }
 
-      const response = await fetch("https://audiobook.shellcode.cloud/api/story", {
+      const response = await fetch("https://lumeromind.shellcode.website/api/story", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -193,7 +193,7 @@ function Stories() {
       }
 
       const response = await fetch(
-        `https://audiobook.shellcode.cloud/api/stories/${newStory.id}`,
+        `https://lumeromind.shellcode.website/api/stories/${newStory.id}`,
         {
           method: "PUT",
           headers: {
@@ -243,7 +243,7 @@ function Stories() {
       try {
         const token = localStorage.getItem("token");
         const response = await fetch(
-          `https://audiobook.shellcode.cloud/api/stories/${storyId}`,
+          `https://lumeromind.shellcode.website/api/stories/${storyId}`,
           {
             method: "DELETE",
             headers: {
